@@ -42,8 +42,8 @@
 # 设计稿
     大概开发好后的样子
 ![Image text](/image/1.png)
-![Image text](\image\2.png)
-![Image text](\image\4.png)
+![Image text](/image/2.png)
+![Image text](/image/4.png)
 
 # 功能设计
-![Image text](\image\3.png)
+![Image text](/image/3.png)
