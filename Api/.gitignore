@@ -1,0 +1,6 @@
+env
+*.pyc
+.vscode/settings.json
+*.idea
+.idea
+migrations
