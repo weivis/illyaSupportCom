@@ -1,5 +1,8 @@
 # IllyaDoujinCom 伊莉雅应援网站
 
+    开源说明:
+        开源仅仅为了利于入门开发者参考 并非代表程序开放二次使用
+        
     网站当前处于开发状态中 如有兴趣欢迎加入一起开发
     魔法少女☆伊莉雅同人爱好者网站
     中国地区応援サイト
@@ -24,6 +27,15 @@
         Product 由于全部自我完成设计和开发 所以不考虑绘制原型
         Web 前端
         ini 服务器配置文件
+
+    [程序说明]
+        项目采用了flask_docs生成在线文档
+        运行后/docs/api/在线文档地址
+
+    [数据库迁移方法]
+        python manager.py db init
+        python manager.py db migrate
+        python manager.py db upgrade
 
 # 项目技术
 
