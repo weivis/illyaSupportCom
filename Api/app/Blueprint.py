@@ -8,8 +8,6 @@ from app.bbs import bbs
 from app.user import user
 from app.video import video
 
-nginx_io = '/api'
-
 DEFAULT_BLUEPRINT = (
     (admin, '/admin'),
     (album, '/album'),
@@ -25,4 +23,4 @@ DEFAULT_BLUEPRINT = (
 def config_blueprint(app):
     # 循环读取元组中的蓝本
     for blueprint, prefix in DEFAULT_BLUEPRINT:
-        app.register_blueprint(blueprint, url_prefix = nginx_io +  prefix)
+        app.register_blueprint(blueprint, url_prefix = prefix)
