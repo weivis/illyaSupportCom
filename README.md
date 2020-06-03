@@ -58,6 +58,7 @@
     Mysql Redis
 
 > 部署
+
     MaridDB Uwsgi Supervisord Nginx
 
 ### 设计稿
