@@ -1,4 +1,4 @@
-# IllyaDoujinCom 伊莉雅应援网站
+# IllyaSupportCom 伊莉雅应援网站
 
     illya-support.weivird.com
     网站当前处于开发状态中 如有兴趣欢迎加入一起开发
@@ -68,5 +68,5 @@
 > 官方动态和伊莉雅相关资讯页面
 ![Image text](/image/4.png)
 
-# 功能设计
+### 功能设计蓝图
 ![Image text](/image/3.png)
