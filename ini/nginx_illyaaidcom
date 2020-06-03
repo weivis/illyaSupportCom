@@ -1,0 +1,48 @@
+server {
+    listen 80;
+    server_name illya-support.weivird.com;
+
+    rewrite_log             on;
+    charset                 utf8;
+
+    client_max_body_size    1024m;
+
+    ssl off;
+
+    #证书文件名称
+    ssl_certificate /home/ubuntu/server/My-Website/https_ssl/1_www.weivird.com_bundle.crt;
+
+    #私钥文件名称
+    ssl_certificate_key /home/ubuntu/server/My-Website/https_ssl/2_www.weivird.com.key;
+    ssl_session_timeout 5m;
+
+    #请按照以下协议配置
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+    #请按照以下套件配置，配置加密套件，写法遵循 openssl 标准。
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
+    ssl_prefer_server_ciphers on;
+
+    access_log  /home/ubuntu/nginx_log/mywebsite.access.log;
+    error_log  /home/ubuntu/nginx_log/mywebsite.error.log;
+
+    location /static {
+        proxy_redirect      off;
+        alias               /home/ubuntu/server/My-Website/Api/app/static;
+        access_log          off;
+        expires             30d;
+        add_header  Cache-Control   public;
+    }
+
+    location /api {
+        include         /etc/nginx/uwsgi_params;
+        uwsgi_pass      unix:/tmp/mywebsite.sock;
+    }
+
+    location / {
+      alias   /home/ubuntu/server/My-Website/Web/dist/;
+      index  index.html;
+      try_files $uri $uri /index.html;
+    }
+
+}
