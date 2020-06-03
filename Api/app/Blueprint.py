@@ -23,4 +23,4 @@ DEFAULT_BLUEPRINT = (
 def config_blueprint(app):
     # 循环读取元组中的蓝本
     for blueprint, prefix in DEFAULT_BLUEPRINT:
-        app.register_blueprint(blueprint, url_prefix = prefix)
+        app.register_blueprint(blueprint, url_prefix = '/api' + prefix)

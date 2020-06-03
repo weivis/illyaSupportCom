@@ -39,7 +39,7 @@ server {
         uwsgi_pass      unix:/tmp/illya_support.sock;
     }
 
-    location /docs {
+    location /docs/api/ {
         include         /etc/nginx/uwsgi_params;
         uwsgi_pass      unix:/tmp/illya_support.sock;
     }

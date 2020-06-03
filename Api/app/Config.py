@@ -29,7 +29,7 @@ MAIL_PASSWORD = ''
 
 # ----------------------------------------------------------------------
 
-API_DOC_MEMBER = ['album','anime','auth','bbs','article','user','video']
+API_DOC_MEMBER = ['api/admin','api/album','api/anime','api/auth','api/bbs','api/article','api/user','api/video']
 
 # 需要排除的 RESTful Api 文档
 RESTFUL_API_DOC_EXCLUDE = []
