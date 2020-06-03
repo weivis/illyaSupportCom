@@ -24,4 +24,4 @@ def config_extensions(app):
 
     mail.init_app(app)
 
-    apidoc.init_app(app, title='Api Doc', version='1.0.0')
+    apidoc.init_app(app)

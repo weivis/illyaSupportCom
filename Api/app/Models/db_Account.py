@@ -9,7 +9,7 @@ class AccountAdmin(db.Model):
 
     token = db.Column(db.Text)
     email = db.Column(db.Text)
-    profile = db.Column(db.Text)
+    head = db.Column(db.Text)
     username = db.Column(db.String(255))
     password = db.Column(db.Text)
     update_time = db.Column(db.DateTime, index=True, default=datetime.now, onupdate=datetime.now)  # 更新时间
@@ -23,7 +23,7 @@ class AccountUser(db.Model):
 
     token = db.Column(db.Text)
     email = db.Column(db.Text)
-    profile = db.Column(db.Text)
+    head = db.Column(db.Text)
     username = db.Column(db.String(255))
     password = db.Column(db.Text)
     update_time = db.Column(db.DateTime, index=True, default=datetime.now, onupdate=datetime.now)  # 更新时间
