@@ -25,10 +25,10 @@ SERVER_GULAOBURL = HOSTQUERYTYPE + '://' + RUNHOST + ':' + str(RUNPORT)
 SERVER_STATICLOADURL = SERVER_GULAOBURL + '/static'
 # ----------------------------------------------------------------------
 
-MAIL_SERVER = ''
+MAIL_SERVER = 'smtp.163.com'
 MAIL_PORT = 25
 MAIL_USE_TLS = True
-MAIL_USERNAME = ''
+MAIL_USERNAME = 'happys_wei@163.com'
 MAIL_PASSWORD = ''
 
 # ----------------------------------------------------------------------

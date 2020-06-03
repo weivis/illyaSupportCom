@@ -2,6 +2,19 @@ from app.auth import auth, views
 from app.Common import ReturnRequest
 from app.Middleware import requestPOST, TokenPost
 
+@auth.route('/seedtest')
+def seedtest():
+    from app.Email import SeedEmail
+    html = '<h3>点击以下链接完成账户注册验证</h3><a>{0}</a>'.format('http://illya-support.weivird.com/docs/api/')
+    SeedEmail(
+        email_title = '[ 魔法少女伊莉雅应援站(illya-support.weivird.com) ]注册账户邮箱验证',
+        email_body = '请点击链接完成账户注册验证',
+        email_html = html,
+        recipients = ['442981412@qq.com'],
+        sender = 'happys_wei@163.com'
+    )
+    return 'ok'
+
 @auth.route('/sign-in', methods=["POST"])
 @requestPOST
 def auth_sign_in(request):
@@ -29,8 +42,8 @@ def auth_register(request):
     '''注册
     Args
         email(str)注册邮箱
-        passport(str)登录密码
-        repassport(str)重复输入一次密码
+        password(str)登录密码
+        repassword(str)重复输入一次密码
 
     Result
         200 
