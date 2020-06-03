@@ -4,12 +4,12 @@
     网站当前处于开发状态中 如有兴趣欢迎加入一起开发
     魔法少女☆伊莉雅同人爱好者网站
     中国地区応援サイト
-    
+
     QQgroup : 700958668
 
 ### 云监工和催坑
     在线Api文档地址
-    http://illya-support.weivird.com/docs/api/
+    https://illya-support.weivird.com/docs/api/
 
 ### 开源说明
     开源仅仅为了利于入门开发者参考 并非代表程序开放二次使用

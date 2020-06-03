@@ -7,7 +7,7 @@ server {
 
     client_max_body_size    1024m;
 
-    ssl off;
+    ssl on;
 
     #证书文件名称
     ssl_certificate /home/ubuntu/server/illyaSupportCom/SSL/illya_support_weivird_com.crt;
