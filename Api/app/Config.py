@@ -1,6 +1,9 @@
 # 跨域密钥
 SECRET_KEY = '\x12my\x0bVO\xeb\xf8\x18\x15\xc5_?\x91\xd7h\x06AC'
 
+# DBUG
+USEFLASKDEBUG = True
+
 # ----------------------------------------------------------------------
 
 # 测试服数据库
@@ -12,7 +15,13 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 # ----------------------------------------------------------------------
 
 # 服务器地址
-SERVER_GULAOBURL = 'http://127.0.0.1:8080'
+HOSTQUERYTYPE = 'http'  # 协议
+RUNHOST = '127.0.0.1'   # 运行ip
+RUNPORT = 8080          # 运行端口号
+
+SERVER_GULAOBURL = HOSTQUERYTYPE + '://' + RUNHOST + ':' + str(RUNPORT)
+
+# 静态文件加载地址
 SERVER_STATICLOADURL = SERVER_GULAOBURL + '/static'
 # ----------------------------------------------------------------------
 
@@ -29,7 +38,7 @@ MAIL_PASSWORD = ''
 
 # ----------------------------------------------------------------------
 
-API_DOC_MEMBER = ['api/admin','api/album','api/anime','api/auth','api/bbs','api/article','api/user','api/video']
+API_DOC_MEMBER = ['api/admin','api/album','api/anime','api/auth','api/bbs','api/article','api/user','api/video','Api接口文档说明']
 
 # 需要排除的 RESTful Api 文档
 RESTFUL_API_DOC_EXCLUDE = []

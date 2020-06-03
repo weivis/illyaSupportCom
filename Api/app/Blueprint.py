@@ -1,4 +1,3 @@
-
 from app.admin import admin
 from app.album import album
 from app.anime import anime

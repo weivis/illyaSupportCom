@@ -17,12 +17,25 @@ def create_app():
 
   app.config.from_object(Config)
 
-  app.debug=True
-
   config_extensions(app)
 
   config_blueprint(app)
 
   config_errorhandler(app)
 
+  @app.route('/Api接口文档说明')
+  def AppDocs():
+      '''
+        这是一个不可用接口
+
+        请求说明
+            用户请求需要登录的接口时候 头部必须携带Token
+        
+        公共返回码说明
+            200 成功
+            201-210 自定义
+            10086 用户在未登录的情况下请求需要登录的接口
+
+      '''
+      
   return app

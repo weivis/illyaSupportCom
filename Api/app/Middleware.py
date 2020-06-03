@@ -54,10 +54,10 @@ class Auth:
         Adminclass = AccountAdmin
         Userclass = AccountUser
 
-        if user_group == 1:
+        if 1 in user_group:
             self.account = Adminclass.query.filter(Adminclass.token == token).first()
 
-        if user_group == 2:
+        if 2 in user_group:
             self.account = Userclass.query.filter(Userclass.token == token).first()
 
         self.token = token

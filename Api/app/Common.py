@@ -5,7 +5,7 @@ def ReturnRequest(code, msg, data):
         统一返回请求的处理结果
     '''
     if not msg:
-        msg = 'OK'
+        msg = '成功'
     jso = {'code':code, 'msg': msg,'data': data}
 
     # 打印每个请求的返回结果

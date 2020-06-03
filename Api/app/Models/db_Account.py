@@ -26,6 +26,7 @@ class AccountUser(db.Model):
     head = db.Column(db.Text)
     username = db.Column(db.String(255))
     password = db.Column(db.Text)
+    status = db.Column(db.Integer, default=0)
     update_time = db.Column(db.DateTime, index=True, default=datetime.now, onupdate=datetime.now)  # 更新时间
     create_time = db.Column(db.DateTime, index=True, default=datetime.now)  # 创建时间
 
