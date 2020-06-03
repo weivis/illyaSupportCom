@@ -10,10 +10,10 @@ server {
     ssl off;
 
     #证书文件名称
-    ssl_certificate /home/ubuntu/server/My-Website/https_ssl/1_www.weivird.com_bundle.crt;
+    ssl_certificate /home/ubuntu/server/illyaSupportCom/SSL/illya_support_weivird_com.crt;
 
     #私钥文件名称
-    ssl_certificate_key /home/ubuntu/server/My-Website/https_ssl/2_www.weivird.com.key;
+    ssl_certificate_key /home/ubuntu/server/illyaSupportCom/SSL/illya_support_weivird_com.key;
     ssl_session_timeout 5m;
 
     #请按照以下协议配置
@@ -23,12 +23,12 @@ server {
     ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
     ssl_prefer_server_ciphers on;
 
-    access_log  /home/ubuntu/nginx_log/mywebsite.access.log;
-    error_log  /home/ubuntu/nginx_log/mywebsite.error.log;
+    access_log  /home/ubuntu/nginx_log/illyaSupport.access.log;
+    error_log  /home/ubuntu/nginx_log/illyaSupport.error.log;
 
     location /static {
         proxy_redirect      off;
-        alias               /home/ubuntu/server/My-Website/Api/app/static;
+        alias               /home/ubuntu/server/illyaSupportCom/Api/app/static;
         access_log          off;
         expires             30d;
         add_header  Cache-Control   public;
@@ -36,11 +36,11 @@ server {
 
     location /api {
         include         /etc/nginx/uwsgi_params;
-        uwsgi_pass      unix:/tmp/mywebsite.sock;
+        uwsgi_pass      unix:/tmp/illya_support.sock;
     }
 
     location / {
-      alias   /home/ubuntu/server/My-Website/Web/dist/;
+      alias   /home/ubuntu/server/illyaSupportCom/Web/dist/;
       index  index.html;
       try_files $uri $uri /index.html;
     }

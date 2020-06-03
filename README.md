@@ -57,6 +57,9 @@
 
     Mysql Redis
 
+> 部署
+    MaridDB Uwsgi Supervisord Nginx
+
 ### 设计稿
 大概开发好后的样子
 > 番剧详情页
