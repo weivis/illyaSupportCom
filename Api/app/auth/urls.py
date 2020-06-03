@@ -15,6 +15,23 @@ def seedtest():
     )
     return 'ok'
 
+@auth.route('/vcodetest')
+def vcodetest():
+    from app.Redis import CreateVcode
+    gtype, vcode = CreateVcode('',{'id':1})
+    if gtype:
+        return str(vcode)
+    return 'error'
+
+@auth.route('/vcodetest/<vcode>')
+def vcodetestc(vcode):
+    from app.Redis import CheckVcode
+    data = CheckVcode(vcode)
+    if data:
+        return str('成功') + str(data)
+    return str('失败')
+
+
 @auth.route('/sign-in', methods=["POST"])
 @requestPOST
 def auth_sign_in(request):

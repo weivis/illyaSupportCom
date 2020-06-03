@@ -5,6 +5,7 @@ from datetime import datetime
 from app.Extensions import db
 from app import Config
 from app.Email import SeedEmail
+from app.Redis import CreateVcode
 
 
 def auth_sign_in(request):
@@ -18,7 +19,7 @@ def auth_sign_in(request):
     if not user:
         return 400, '账户不存在', {}
 
-    if user.status != 0:
+    if user.status == 3:
         return 400, '该账户存在异常 请联系管理员', {}
 
     if check_password_hash(str(user.password), str(password)):
@@ -71,34 +72,43 @@ def auth_register(request):
         return 206, '两次输入不一致', {}
 
         try:
-
-            try:
-                html = '<h3>点击以下链接完成账户注册验证</h3><a>{0}</a>'.format('http://illya-support.weivird.com/docs/api/')
-                SeedEmail(
-                    email_title = '[ 魔法少女伊莉雅应援站(illya-support.weivird.com) ]注册账户邮箱验证',
-                    email_body = '请点击链接完成账户注册验证',
-                    email_html = html,
-                    recipients = [email],
-                    sender = 'happys_wei@163.com'
-                )
-
-            except Exception as e:
-                print(e)
-                return 503, '服务器出错', {}
-
             u = AccountUser()
             u.password = str(username)
             u.email = str(email)
             u.password = generate_password_hash(password)
-            db.session.commit(u)
-            return 200, '', {}
+            u.status = 0
+            db.session.add(u)
+            db.session.first()
+
+            gtype, vcode = CreateVcode('', {'id': u.id})
+            if gtype:
+
+                try:
+                    html = '<h3>点击以下链接完成账户注册验证</h3><a>{0}</a>'.format(
+                        str(vcode))
+                    SeedEmail(
+                        email_title='[ 魔法少女伊莉雅应援站(illya-support.weivird.com) ]注册账户邮箱验证',
+                        email_body='请点击链接完成账户注册验证',
+                        email_html=html,
+                        recipients=[email],
+                        sender='happys_wei@163.com'
+                    )
+
+                except Exception as e:
+                    print(e)
+                    return 503, '服务器出错', {}
+
+            else:
+                return 504, '服务器出错', {}
+
+            db.session.commit()
 
         except Exception as e:
             print(e)
             db.session.rollback()
             return 502, '服务器出错', {}
 
-    return 200, '', {}
+    return 200, '', {'vcode': vcode}
 
 
 def auth_verify_register_vcode(request):
