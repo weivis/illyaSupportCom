@@ -17,7 +17,7 @@ def CreateVcode(code_type, data):
         False，无效
     '''
     try:
-        time = (60 * 20)
+        time = (60 * 30)
         if code_type or code_type != '':
             key = str(code_type) + '-' + RandomStr()
         else:
