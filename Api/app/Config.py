@@ -7,8 +7,8 @@ USEFLASKDEBUG = True
 # ----------------------------------------------------------------------
 
 # 测试服数据库
-# SQLALCHEMY_DATABASE_URI = "mysql://root:weivimysql@47.94.153.68:3306/illya_support?charset=utf8mb4"
-SQLALCHEMY_DATABASE_URI = "mysql://root:@127.0.0.1:3306/illya_support?charset=utf8mb4"
+SQLALCHEMY_DATABASE_URI = "mysql://root:weivimysql@47.94.153.68:3306/illya_support?charset=utf8mb4"
+# SQLALCHEMY_DATABASE_URI = "mysql://root:@127.0.0.1:3306/illya_support?charset=utf8mb4"
 
 # 如果设置成 True (默认情况)，Flask-SQLAlchemy 将会追踪对象的修改并且发送信号。这需要额外的内存， 如果不必要的可以禁用它。
 SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -39,7 +39,7 @@ MAIL_PASSWORD = 'YTKPXXRKISOTASSV'
 
 # ----------------------------------------------------------------------
 
-API_DOC_MEMBER = ['api/admin','api/album','api/anime','api/auth','api/bbs','api/article','api/user','api/video','Api接口文档说明']
+API_DOC_MEMBER = ['api/cv','api/admin','api/album','api/bangumi','api/auth','api/bbs','api/article','api/user','api/video','Api接口文档说明']
 
 # 需要排除的 RESTful Api 文档
 RESTFUL_API_DOC_EXCLUDE = []

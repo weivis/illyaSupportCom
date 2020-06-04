@@ -1,21 +1,23 @@
 from app.admin import admin
 from app.album import album
-from app.anime import anime
+from app.bangumi import bangumi
 from app.article import article
 from app.auth import auth
 from app.bbs import bbs
 from app.user import user
 from app.video import video
+from app.cv import cv
 
 DEFAULT_BLUEPRINT = (
     (admin, '/admin'),
     (album, '/album'),
-    (anime, '/anime'),
+    (bangumi, '/bangumi'),
     (article, '/article'),
     (auth, '/auth'),
     (bbs, '/bbs'),
     (user, '/user'),
-    (video, '/video')
+    (video, '/video'),
+    (cv, '/cv')
 )
 
 # 封装配置蓝本的函数
