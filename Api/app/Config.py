@@ -29,7 +29,7 @@ MAIL_SERVER = 'smtp.163.com'
 MAIL_PORT = 25
 MAIL_USE_TLS = True
 MAIL_USERNAME = 'happys_wei@163.com'
-MAIL_PASSWORD = ''
+MAIL_PASSWORD = 'akzsditwmmffcabe'
 
 # ----------------------------------------------------------------------
 
