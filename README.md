@@ -34,6 +34,9 @@
         Product 由于全部自我完成设计和开发 所以不考虑绘制原型
         Web 前端
         ini 服务器配置文件
+        SSL https证书
+        Image README文件贴图文件夹
+
 
     [程序说明]
         项目采用了flask_docs生成在线文档
