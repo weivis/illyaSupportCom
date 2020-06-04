@@ -7,7 +7,8 @@ USEFLASKDEBUG = True
 # ----------------------------------------------------------------------
 
 # 测试服数据库
-SQLALCHEMY_DATABASE_URI = "mysql://root:weivimysql@47.94.153.68:3306/illya_support?charset=utf8mb4"
+# SQLALCHEMY_DATABASE_URI = "mysql://root:weivimysql@47.94.153.68:3306/illya_support?charset=utf8mb4"
+SQLALCHEMY_DATABASE_URI = "mysql://root:@127.0.0.1:3306/illya_support?charset=utf8mb4"
 
 # 如果设置成 True (默认情况)，Flask-SQLAlchemy 将会追踪对象的修改并且发送信号。这需要额外的内存， 如果不必要的可以禁用它。
 SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -29,7 +30,7 @@ MAIL_SERVER = 'smtp.163.com'
 MAIL_PORT = 25
 MAIL_USE_TLS = True
 MAIL_USERNAME = 'happys_wei@163.com'
-MAIL_PASSWORD = 'akzsditwmmffcabe'
+MAIL_PASSWORD = 'YTKPXXRKISOTASSV'
 
 # ----------------------------------------------------------------------
 

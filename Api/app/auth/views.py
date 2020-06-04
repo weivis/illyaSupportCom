@@ -6,12 +6,13 @@ from app.Extensions import db
 from app import Config
 from app.Email import SeedEmail
 from app.Redis import CreateVcode, CheckVcode
+from app.Tool import CheckEmailStr
 
 def auth_sign_in(request):
     email = request.get('email', None)
-    passport = request.get('passport', None)
+    password = request.get('password', None)
 
-    if not email or not passport:
+    if not email or not password:
         return 400, '账户或密码不正确', {}
 
     user = AccountUser.query.filter_by(email=email).first()
@@ -46,12 +47,6 @@ def auth_sign_in(request):
     return 400, '账户或密码不正确', {}
 
 
-def Check_EmailStr(email):
-    # re.compile(r"\"?([a-zA-Z0-9_-]+@\w+\.\w+)\"?")
-    pattern = re.compile(r"\"?([0-9A-Za-z\-_\.]+@\w+\.\w+)\"?")
-    return re.match(pattern, email)
-
-
 def auth_register(request):
     email = request.get('email', None)
     username = request.get('username', None)
@@ -64,7 +59,7 @@ def auth_register(request):
     if AccountUser.query.filter_by(username=username).first():
         return 400, '用户名已存在', {}
 
-    if not Check_EmailStr(email):
+    if not CheckEmailStr(email):
         return 400, '邮箱格式有误', {}
 
     emailuser = AccountUser.query.filter_by(email=email).first()
@@ -78,44 +73,43 @@ def auth_register(request):
     if str(password) != str(repassword):
         return 400, '两次输入不一致', {}
 
-        try:
-            u = AccountUser()
-            u.password = str(username)
-            u.email = str(email)
-            u.password = generate_password_hash(password)
-            u.status = 0
-            db.session.add(u)
-            db.session.first()
+    try:
+        u = AccountUser()
+        u.username = str(username)
+        u.email = str(email)
+        u.password = generate_password_hash(password)
+        u.status = 0
+        db.session.add(u)
+        db.session.flush()
 
-            gtype, vcode = CreateVcode('', {'id': u.id})
-            if gtype:
+        gtype, vcode = CreateVcode('', {'id': u.id})
+        if gtype:
 
-                try:
-                    html = '<h3>点击以下链接完成账户注册验证</h3><a>{0}</a>'.format(
-                        str(vcode))
-                    SeedEmail(
-                        email_title='[ 魔法少女伊莉雅应援站(illya-support.weivird.com) ]注册账户邮箱验证',
-                        email_body='请点击链接完成账户注册验证',
-                        email_html=html,
-                        recipients=[email],
-                        sender='happys_wei@163.com'
-                    )
+            try:
+                html = '<h3>点击以下链接完成账户注册验证</h3><a>{0}</a>'.format(
+                    str(vcode))
+                SeedEmail(
+                    email_title='[ 魔法少女伊莉雅应援站(illya-support.weivird.com) ]注册账户邮箱验证',
+                    email_body='请点击链接完成账户注册验证',
+                    email_html=html,
+                    recipients=[email],
+                    sender='happys_wei@163.com'
+                )
 
-                except Exception as e:
-                    print(e)
-                    return 503, '服务器出错', {}
+            except Exception as e:
+                print(e)
+                return 503, '服务器出错', {}
 
-            else:
-                return 504, '服务器出错', {}
+        else:
+            return 504, '服务器出错', {}
 
-            db.session.commit()
+        db.session.commit()
+        return 200, '注册成功', {'vcode': vcode, 'email':email}
 
-        except Exception as e:
-            print(e)
-            db.session.rollback()
-            return 502, '服务器出错', {}
-
-    return 200, '注册成功', {'vcode': vcode, 'email':email}
+    except Exception as e:
+        print(e)
+        db.session.rollback()
+        return 502, '服务器出错', {}
 
 def auth_register_again_sendemail(request):
     email = request.get('email',None)
@@ -124,7 +118,7 @@ def auth_register_again_sendemail(request):
     if not querys:
         return 400, '该邮箱未注册', {}
 
-    if querys.status != 1:
+    if querys.status != 0:
         return 400, '该邮箱以验证完成 无法重复发送注册验证码', {}
 
     gtype, vcode = CreateVcode('', {'id': querys.id})
@@ -160,6 +154,9 @@ def auth_verify_register_vcode(request):
     data = CheckVcode(vcode)
     if data:
         u = AccountUser.query.filter_by(id=data['id']).first()
+
+        if u.status == 1:
+            return 400, '已验证过无法重复验证', {} 
 
         try:
             u.status = 1
