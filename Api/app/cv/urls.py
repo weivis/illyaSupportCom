@@ -8,7 +8,20 @@ def cv_list(request):
     '''CV列表
     Args
         keyword(str)搜索
+        sfilter(int)过滤器 0 正常 ,1 全部
     Result
+        id, people_name, head
+        {
+        "code": 200,
+        "data": [
+            {
+            "head": "0.png",
+            "id": 1,
+            "people_name": "唯酱"
+            }
+        ],
+        "msg": "成功"
+        }
     '''
     c,m,d = views.cv_list(request.json)
     return ReturnRequest(c,m,d)
