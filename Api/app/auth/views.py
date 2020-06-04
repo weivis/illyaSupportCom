@@ -5,8 +5,7 @@ from datetime import datetime
 from app.Extensions import db
 from app import Config
 from app.Email import SeedEmail
-from app.Redis import CreateVcode
-
+from app.Redis import CreateVcode, CheckVcode
 
 def auth_sign_in(request):
     email = request.get('email', None)
@@ -34,7 +33,7 @@ def auth_sign_in(request):
             else:
                 head = Config.SERVER_STATICLOADURL + \
                     '/user/head/' + str(user.head)
-            return 200, '成功', dict(token=md5, username=user.username, head=head)
+            return 200, '登录成功', dict(token=md5, username=user.username, head=head)
 
         except Exception as e:
             print(e)
@@ -108,12 +107,39 @@ def auth_register(request):
             db.session.rollback()
             return 502, '服务器出错', {}
 
-    return 200, '', {'vcode': vcode}
+    return 200, '注册成功', {'vcode': vcode}
 
 
 def auth_verify_register_vcode(request):
-    return 200, '', {}
+    vcode = request.get('vcode',None)
 
+    if not vcode:
+        return 400, '验证码有误', {}
+
+    data = CheckVcode(vcode)
+    if data:
+        u = AccountUser.query.filter_by(id=data['id']).first()
+
+        try:
+            u.status = 1
+            db.session.commit()
+            return 200, '验证成功', {}
+
+        except Exception as e:
+            print(e)
+            db.session.rollback()
+            return 502, '服务器出错', {}
+
+    return 400, '验证码有误', {}
 
 def auth_logout(request):
-    return 200, '', {}
+    current_account = request['current_account']
+    current_account.token = ''
+
+    try:
+        db.session.commit()
+        return 200, '退出成功', {}
+
+    except:
+        db.session.rollback()
+        return 502, '服务器出错', {}
