@@ -101,7 +101,7 @@ def bangumi_add_or_edit(request):
 @bangumi.route('/change', methods=["POST"])
 @requestPOST
 def bangumi_change(request):
-    '''更改番剧
+    '''更改番剧(删除 上下架)
     Args
         status(int)修改上下架状态 1 正常 2 下架
         dele(all)不为空代表删除
@@ -118,7 +118,7 @@ def bangumi_change(request):
 @bangumi.route('/playurl/addoredit', methods=["POST"])
 @requestPOST
 def bangumi_playurl_add_or_edit(request):
-    '''添加播放源地址
+    '''添加播放源地址和编辑
     Args
         id              int     id
         url             str     地址
@@ -133,4 +133,56 @@ def bangumi_playurl_add_or_edit(request):
         data:   null
     '''
     c,m,d = views.bangumi_playurl_addoredit(request.json)
+    return ReturnRequest(c,m,d)
+
+@bangumi.route('/playurl/del', methods=["POST"])
+@requestPOST
+def bangumi_playurl_del(request):
+    '''删除播放源地址
+    Args
+        id              int     id
+
+    Result
+        code:   状态码
+            200 成功
+        msg:    消息
+        data:   null
+    '''
+    c,m,d = views.bangumi_playurl_del(request.json)
+    return ReturnRequest(c,m,d)
+
+@bangumi.route('/cv/addoredit', methods=["POST"])
+@requestPOST
+def Bangumi_cv_addoredit(request):
+    '''绑定cv和编辑已经绑定了的cv
+    Args
+        id                      int     id
+        bangumi_id              int     番剧id
+        cv_id                   int     cvid
+        sort                    int     权重
+        role_name               str     角色名
+
+    Result
+        code:   状态码
+            200 成功
+        msg:    消息
+        data:   null
+    '''
+    c,m,d = views.bangumi_playurl_del(request.json)
+    return ReturnRequest(c,m,d)
+
+@bangumi.route('/cv/del', methods=["POST"])
+@requestPOST
+def Bangumi_cv_del(request):
+    '''删除单个绑定了的CV配音信息
+    Args
+        id                      int     id
+
+    Result
+        code:   状态码
+            200 成功
+        msg:    消息
+        data:   null
+    '''
+    c,m,d = views.Bangumi_cv_del(request.json)
     return ReturnRequest(c,m,d)

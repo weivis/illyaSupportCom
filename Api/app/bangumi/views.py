@@ -1,4 +1,5 @@
-from app.Models.db_Bangumi import BangumiAnime, BangumiPlayurl
+from app.Models.db_Bangumi import BangumiAnime, BangumiPlayurl, BangumiRolecv
+from app.Models.db_Cv import CvData
 from app.Tool import _Paginate, StrForDate
 from app.Extensions import db
 
@@ -206,6 +207,9 @@ def bangumi_playurl_addoredit(request):
     if not bangumi_id:
         return 400, '所属番剧id不能为空', {}
 
+    if not BangumiAnime.query.filter_by(id=bangumi_id).first():
+        return 400, '添加的番剧不存在', {}
+
     if id:
         obj = BangumiPlayurl.query.filter_by(id=id).first()
 
@@ -232,4 +236,82 @@ def bangumi_playurl_addoredit(request):
         return 502, '服务器出错', {}
 
 def bangumi_playurl_del(request):
-    pass
+    id = request.get('id',None)
+
+    if not id:
+        return 400, 'id不能为空', {}
+
+    obj = BangumiPlayurl.query.filter_by(id=id).first()
+
+    if not obj:
+        return 400, '被删除的id对象不存在或id有误', {}
+
+    try:
+        db.session.delete(obj)
+        db.session.commit()
+        return 200, '', {}
+
+    except Exception as e:
+        print(e)
+        return 502, '服务器出错', {}
+
+def Bangumi_cv_addoredit(request):
+    id = request.get('id',None)
+    bangumi_id = request.get('bangumi_id',None)
+    cv_id = request.get('cv_id',None)
+    sort = request.get('sort',0)
+    role_name = request.get('role_name',None)
+
+    if id:
+        obj = BangumiRolecv.query.filter_by(id=id).first()
+
+        if not obj:
+            return 400, '角色配音数据不存在', {}
+    else:
+        obj = BangumiRolecv()
+
+    if not BangumiAnime.query.filter_by(id=bangumi_id).first():
+        return 400, '添加的番剧不存在', {}
+
+    if not CvData.query.filter_by(id=cv_id).first():
+        return 400, '添加的CV不存在', {}
+
+    if not role_name:
+        return 400, '被绑定CV的角色名不能为空', {}
+
+    obj.bangumi_id = bangumi_id
+    obj.role_name = role_name
+    obj.cv_id = cv_id
+    obj.sort = sort
+
+    try:
+        if not id:
+            db.session.add(obj)
+
+        db.session.commit()
+        return 200, '', {}
+
+    except Exception as e:
+        print(e)
+        db.session.rollback()
+        return 502, '服务器出错', {}
+
+def Bangumi_cv_del(request):
+    id = request.get('id',None)
+
+    if not id:
+        return 400, 'id不能为空', {}
+
+    obj = BangumiRolecv.query.filter_by(id=id).first()
+
+    if not obj:
+        return 400, '被删除的id对象不存在或id有误', {}
+
+    try:
+        db.session.delete(obj)
+        db.session.commit()
+        return 200, '', {}
+
+    except Exception as e:
+        print(e)
+        return 502, '服务器出错', {}
