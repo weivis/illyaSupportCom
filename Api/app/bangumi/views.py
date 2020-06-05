@@ -58,7 +58,7 @@ def bangumi_info(request):
         'upstatus':i.upstatus,
         'staff':i.staff,
         'station_play':i.station_play,
-        'openplay_time':i.openplay_time,
+        'openplay_time':i.openplay_time.strftime("%Y-%m-%d"),
         'sort':i.sort
     }
 
