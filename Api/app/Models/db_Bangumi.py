@@ -26,7 +26,7 @@ class BangumiAnime(db.Model):
         0 = 正常
         1 = 下架
     '''
-    sort = db.Column(db.Integer)                # 权重
+    sort = db.Column(db.Integer, default=0)                # 权重
     update_time = db.Column(db.DateTime, index=True, default=datetime.now, onupdate=datetime.now)  # 更新时间
     create_time = db.Column(db.DateTime, index=True, default=datetime.now)  # 创建时间
 

@@ -13,14 +13,23 @@ def bangumi_list(request):
             3 = OVA
             4 = SP
         pages(int) 分页 默认1
-        
+        sfilter(int) 默认0 0正常 1全部
+
     Result
         code:   状态码
         msg:    消息
         data:
             result
-                id      id
-                
+                id              id
+                name            番剧名
+                setscount       剧集总数
+                introduce       介绍
+                cover           封面
+                upstatus        连载状态
+                staff           staff制作信息
+                station_play    是否支持站内播放
+                openplay_time   开播时间
+                sort            权重
             count   总搜索结果条数
             page    当前页数
             pages   总页数
