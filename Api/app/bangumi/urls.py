@@ -70,7 +70,7 @@ def bangumi_info(request):
 
 @bangumi.route('/add_or_edit', methods=["POST"])
 @requestPOST
-def bangumi_add_and_edit(request):
+def bangumi_add_or_edit(request):
     '''添加番剧或编辑
     Args
         classification(int)类型
@@ -96,4 +96,41 @@ def bangumi_add_and_edit(request):
         data:   null
     '''
     c,m,d = views.bangumi_add_and_edit(request.json)
+    return ReturnRequest(c,m,d)
+
+@bangumi.route('/change', methods=["POST"])
+@requestPOST
+def bangumi_change(request):
+    '''更改番剧
+    Args
+        status(int)修改上下架状态 1 正常 2 下架
+        dele(all)不为空代表删除
+
+    Result
+        code:   状态码
+            200 成功
+        msg:    消息
+        data:   null
+    '''
+    c,m,d = views.bangumi_change(request.json)
+    return ReturnRequest(c,m,d)
+
+@bangumi.route('/playurl/addoredit', methods=["POST"])
+@requestPOST
+def bangumi_playurl_add_or_edit(request):
+    '''添加播放源地址
+    Args
+        id              int     id
+        url             str     地址
+        source_name     str     资源地址名字
+        bangumi_id      int     番剧id
+        sort            int     权重值
+
+    Result
+        code:   状态码
+            200 成功
+        msg:    消息
+        data:   null
+    '''
+    c,m,d = views.bangumi_playurl_addoredit(request.json)
     return ReturnRequest(c,m,d)

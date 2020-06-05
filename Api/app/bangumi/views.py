@@ -155,13 +155,81 @@ def bangumi_add_and_edit(request):
         return 502, '服务器出错', {}
 
 def bangumi_change(request):
-    pass
+    id = request.get('id',None)
+    status = request.get('status',None)
+    dele = request.get('dele',None)
 
-def bangumi_playurl_add(request):
-    pass
+    if not id:
+        return 400, 'id不能为空', {}
 
-def bangumi_playurl_edit(request):
-    pass
+    obj = BangumiAnime.query.filter_by(id=id)
+    if not obj:
+        return 401, '番剧不存在', {}
+
+    if status:
+        if status not in [1,2]:
+            return 400, '参数有误', {}
+        obj.status = status
+
+    if dele:
+        try:
+            db.session.delete(obj)
+            db.session.commit()
+            return 200, '', {}
+
+        except Exception as e:
+            print(e)
+            return 502, '服务器出错', {}
+
+    try:
+        db.session.commit()
+        return 200, '', {}
+
+    except Exception as e:
+        print(e)
+        db.session.rollback()
+        return 502, '服务器出错', {}
+
+def bangumi_playurl_addoredit(request):
+    id = request.get('id',None)
+    url = request.get('url',None)
+    source_name = request.get('source_name',None)
+    bangumi_id = request.get('bangumi_id',None)
+    sort = request.get('sort',0)
+
+    if not url:
+        return 400, '链接地址不能为空', {}
+
+    if not source_name:
+        return 400, '播放源名字不能为空', {}
+
+    if not bangumi_id:
+        return 400, '所属番剧id不能为空', {}
+
+    if id:
+        obj = BangumiPlayurl.query.filter_by(id=id).first()
+
+        if not obj:
+            return 400, '编辑对象不存在或id错误', {}
+
+    else:
+        obj = BangumiPlayurl()
+
+    obj.url = url
+    obj.source_name = source_name
+    obj.bangumi_id = bangumi_id
+    obj.sort = sort
+
+    try:
+        if not id:
+            db.session.add(obj)
+        db.session.commit()
+        return 200, '', {}
+
+    except Exception as e:
+        print(e)
+        db.session.rollback()
+        return 502, '服务器出错', {}
 
 def bangumi_playurl_del(request):
     pass
