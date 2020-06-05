@@ -56,7 +56,7 @@ def cv_edit(request):
 @cv.route('/del', methods=["POST"])
 @requestPOST
 def cv_del(request):
-    '''CV编辑
+    '''CV删除
     Args
         id 要删除的cv的id
     Result

@@ -4,7 +4,7 @@ from app.Extensions import db
 def cv_list(request):
     keyword = request.get('keyword', None)
     sfilter = request.get('sfilter', 0)
-
+    
     if sfilter == 0:
         querys = CvData.query.filter(CvData.isdelete == False).all()
 

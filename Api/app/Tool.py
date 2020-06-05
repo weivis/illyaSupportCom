@@ -1,4 +1,5 @@
 from random import Random
+from datetime import datetime
 import re
 import math
 
@@ -53,3 +54,15 @@ def _Paginate(querys, query_page, per_page=10):
     count = querys.count()
     _paginate = querys.paginate(query_page, per_page=per_page)
     return count, _paginate.items, _paginate.page, _paginate.pages
+
+def StrForDate(s):
+    '''
+        yyyy-MM-dd
+        Str => Date
+    '''
+    try:
+        year_s, mon_s, day_s = s.split('-')
+        return datetime(int(year_s), int(mon_s), int(day_s))
+    except Exception as e:
+        print(e)
+        return {}

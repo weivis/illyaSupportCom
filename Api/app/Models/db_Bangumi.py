@@ -23,8 +23,8 @@ class BangumiAnime(db.Model):
     openplay_time = db.Column(db.DateTime)      # 开播时间
     status = db.Column(db.Integer)              # 状态
     '''
-        0 = 正常
-        1 = 下架
+        1 = 正常
+        2 = 下架
     '''
     sort = db.Column(db.Integer, default=0)                # 权重
     update_time = db.Column(db.DateTime, index=True, default=datetime.now, onupdate=datetime.now)  # 更新时间
