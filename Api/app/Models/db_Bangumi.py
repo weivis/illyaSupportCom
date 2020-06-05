@@ -6,6 +6,13 @@ class BangumiAnime(db.Model):
     
     __tablename__ = 'bangumi_anime'
     id = db.Column(db.Integer, primary_key=True)
+    classification = db.Column(db.Integer)      # 视频分类
+    '''
+        1 = 番剧
+        2 = 剧场版
+        3 = OVA
+        4 = SP
+    '''
     name = db.Column(db.String(255))            # 番剧名
     setscount = db.Column(db.Integer)           # 集数
     introduce = db.Column(db.Text)              # 介绍
