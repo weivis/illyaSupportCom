@@ -108,7 +108,7 @@ def article_addoredit(request):
 
     try:
         if not id:
-            obj.identification = Generate_identification()
+            obj.identification = Generate_identification('article')
             db.session.add(obj)
 
         db.session.commit()

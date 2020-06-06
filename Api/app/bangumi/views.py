@@ -291,7 +291,7 @@ def Bangumi_cv_addoredit(request):
 
     try:
         if not id:
-            obj.identification = Generate_identification()
+            obj.identification = Generate_identification('bangumi')
             db.session.add(obj)
 
         db.session.commit()
