@@ -149,9 +149,9 @@ def article_change(request):
 
     if changeto == 3:
         if obj.is_delete == False:
-            obj.status = True
+            obj.is_delete = True
         else:
-            obj.status = False
+            obj.is_delete = False
 
     if changeto == 4:
         sort = request.get('sort',None)

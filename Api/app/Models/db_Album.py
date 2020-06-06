@@ -22,6 +22,7 @@ class AlbumData(db.Model):
         1 = 正常
         2 = 下架
     '''
+    is_delete = db.Column(db.Boolean, default=False) # 是否删除
     show_index = db.Column(db.Boolean, default=False) # 首页展示
     relation_bangumi_id = db.Column(db.Integer)       # 关联番剧id
     update_time = db.Column(db.DateTime, index=True, default=datetime.now, onupdate=datetime.now)  # 更新时间
@@ -32,6 +33,7 @@ class AlbumDowurl(db.Model):
     
     __tablename__ = 'album_dowurl'
     id = db.Column(db.Integer, primary_key=True)
+    album_id = db.Column(db.Integer)                         # 资源id         
     dowsource_name = db.Column(db.String(255))               # 下载资源来源名
     name = db.Column(db.String(255))                         # 资源名
     dowinfo = db.Column(db.Text)                             # 下载信息

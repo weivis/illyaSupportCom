@@ -7,6 +7,8 @@ from app.bbs import bbs
 from app.user import user
 from app.video import video
 from app.cv import cv
+from app.open import open
+from app.comment import comment
 
 DEFAULT_BLUEPRINT = (
     (admin, '/admin'),
@@ -17,7 +19,9 @@ DEFAULT_BLUEPRINT = (
     (bbs, '/bbs'),
     (user, '/user'),
     (video, '/video'),
-    (cv, '/cv')
+    (cv, '/cv'),
+    (open, '/open'),
+    (comment, '/comment')
 )
 
 # 封装配置蓝本的函数
