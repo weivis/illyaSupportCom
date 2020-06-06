@@ -7,6 +7,7 @@ class BangumiAnime(db.Model):
     __tablename__ = 'bangumi_anime'
     id = db.Column(db.Integer, primary_key=True)
     classification = db.Column(db.Integer)      # 视频分类
+    identification = db.Column(db.String(255))      # 唯一身份标识
     '''
         1 = 番剧
         2 = 剧场版

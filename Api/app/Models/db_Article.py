@@ -9,6 +9,7 @@ class ArticleData(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     classification = db.Column(db.Integer)          # 分类
+    identification = db.Column(db.String(255))      # 唯一身份标识
     '''
         1 = 官方资讯
         2 = 手办
@@ -22,6 +23,7 @@ class ArticleData(db.Model):
         1 = 正常
         2 = 下架
     '''
+    sort = db.Column(db.Integer, default=0)         # 权重
     show_index = db.Column(db.Boolean, default=False) # 首页展示
     is_delete = db.Column(db.Boolean, default=False) # 是否删除
     update_time = db.Column(db.DateTime, index=True, default=datetime.now, onupdate=datetime.now)  # 更新时间

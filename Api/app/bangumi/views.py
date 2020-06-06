@@ -2,6 +2,7 @@ from app.Models.db_Bangumi import BangumiAnime, BangumiPlayurl, BangumiRolecv
 from app.Models.db_Cv import CvData
 from app.Tool import _Paginate, StrForDate
 from app.Extensions import db
+from app.Common import Generate_identification
 
 def bangumi_list(request):
     types = request.get('types', 0)
@@ -19,13 +20,15 @@ def bangumi_list(request):
             BangumiAnime.sort.desc()
             )
 
-    if types:
+    if types != 0:
         data = data.filter_by(classification=types)
 
     count, items, page, pages = _Paginate(data, pages)
 
     result = [{
         'id':i.id,
+        'classification':i.classification,
+        'identification':i.identification,
         'name':i.name,
         'setscount':i.setscount,
         'introduce':i.introduce,
@@ -53,6 +56,8 @@ def bangumi_info(request):
     result = {
         'id':i.id,
         'name':i.name,
+        'classification':i.classification,
+        'identification':i.identification,
         'setscount':i.setscount,
         'introduce':i.introduce,
         'cover':i.cover,
@@ -286,6 +291,7 @@ def Bangumi_cv_addoredit(request):
 
     try:
         if not id:
+            obj.identification = Generate_identification()
             db.session.add(obj)
 
         db.session.commit()
