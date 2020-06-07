@@ -9,16 +9,13 @@ def bangumi_list(request):
     pages = request.get('pages', 1)
     sfilter = request.get('sfilter', 0)
 
+    data = BangumiAnime.query.filter().order_by(
+            BangumiAnime.create_time.desc(),
+            BangumiAnime.sort.desc()
+            )
+
     if sfilter == 0:
-        data = BangumiAnime.query.filter_by(status=1).order_by(
-            BangumiAnime.create_time.desc(),
-            BangumiAnime.sort.desc()
-            )
-    else:
-        data = BangumiAnime.query.filter().order_by(
-            BangumiAnime.create_time.desc(),
-            BangumiAnime.sort.desc()
-            )
+        data = data.filter_by(status=1)
 
     if types != 0:
         data = data.filter_by(classification=types)

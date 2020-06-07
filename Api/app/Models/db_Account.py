@@ -24,6 +24,7 @@ class AccountUser(db.Model):
     token = db.Column(db.Text)
     email = db.Column(db.Text)
     head = db.Column(db.Text)
+    introduce = db.Column(db.Text)              # 个人介绍
     username = db.Column(db.String(255))
     password = db.Column(db.Text)
     status = db.Column(db.Integer, default=0)
