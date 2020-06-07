@@ -11,6 +11,9 @@
     在线Api文档地址
     https://illya-support.weivird.com/docs/api/
 
+### 已完成功能接口和进度
+![Image text](/image/5.png)
+
 ### 开源说明
     开源仅仅为了利于入门开发者参考 并非代表程序开放二次使用
 
