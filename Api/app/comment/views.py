@@ -31,7 +31,6 @@ def comment_list(request):
         'result':result, 'count':count, 'page':page, 'pages':pages
     }
 
-
 # def comment_sublist(request):
 #     commentid = request.get('commentid', None)
 #     pages = request.get('pages', 1)

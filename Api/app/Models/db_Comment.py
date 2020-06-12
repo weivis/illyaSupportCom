@@ -38,5 +38,6 @@ class CommentReport(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     report_comment_id = db.Column(db.Integer)
+    userid = db.Column(db.Integer)
     update_time = db.Column(db.DateTime, index=True, default=datetime.now, onupdate=datetime.now)  # 更新时间
     create_time = db.Column(db.DateTime, index=True, default=datetime.now)  # 创建时间
