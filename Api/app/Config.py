@@ -39,7 +39,7 @@ MAIL_PASSWORD = 'YTKPXXRKISOTASSV'
 
 # ----------------------------------------------------------------------
 
-API_DOC_MEMBER = ['api/comment','api/open','api/cv','api/admin','api/album','api/bangumi','api/auth','api/bbs','api/article','api/user','api/video','Api接口文档说明']
+API_DOC_MEMBER = ['api/comment','api/open','api/cv','api/admin','api/album','api/bangumi','api/auth','api/bbs','api/article','api/user','api/video','api/upload','Api接口文档说明']
 
 # 需要排除的 RESTful Api 文档
 RESTFUL_API_DOC_EXCLUDE = []
