@@ -9,6 +9,7 @@ from app.video import video
 from app.cv import cv
 from app.open import open
 from app.comment import comment
+from app.upload import upload
 
 DEFAULT_BLUEPRINT = (
     (admin, '/admin'),
@@ -21,7 +22,8 @@ DEFAULT_BLUEPRINT = (
     (video, '/video'),
     (cv, '/cv'),
     (open, '/open'),
-    (comment, '/comment')
+    (comment, '/comment'),
+    (upload, '/upload')
 )
 
 # 封装配置蓝本的函数

@@ -10,7 +10,6 @@ const routes = [
   { path: '/404', component: () => import('@/views/404'), hidden: true },
   {
     path: '/',
-    name: 'Home',
     component: Layout,
     children: [
       {
@@ -21,11 +20,16 @@ const routes = [
       },
       {
         path: '/album',
-        name: 'Home',
+        name: 'album',
         component: () => import('@/views/album/'),
-        meta: {title:'首页'}
+        meta: {title:'资源'}
       },
     ]
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/Login/')
   }
 ]
 

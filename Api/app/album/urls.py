@@ -8,6 +8,10 @@ def album_list(request):
     '''资源列表
     Args
         types(int) 获取的资源类型
+            1 = 番剧
+            2 = OST
+            3 = MMD
+            4 = Live2D
         pages(int) 分页 默认1
         sfilter(int) 默认0 0正常 1全部
 

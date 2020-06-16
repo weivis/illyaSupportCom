@@ -1,0 +1,6 @@
+.layout-Lnav{position: fixed;left: 0;top: 60px;bottom: 0;width: 250px;z-index: 999;border-right: solid 1px #e6e6e6;}
+.app-main{width:calc(100% - 250px);margin-left: 250px;margin-top: 60px;background-color: #f4f4f4;}
+.el-menu{border-right: solid 0px #e6e6e6 !important;}
+.layout-Header{position: fixed;left: 0;right: 0;top: 0;height: 60px;background-color: #fff;z-index: 888;}
+.app-main-width{width: 90%;margin: 0 auto;}
+.HeaderLoginbar{position: fixed; top: 16px;right: 25px;z-index: 1000;}

@@ -1,4 +1,4 @@
-from app.Models.db_Account import AccountUser
+from app.Models.db_Account import AccountUser, AccountAdmin
 from flask_bcrypt import check_password_hash, generate_password_hash
 import hashlib
 from datetime import datetime
@@ -7,6 +7,39 @@ from app import Config
 from app.Email import SeedEmail
 from app.Redis import CreateVcode, CheckVcode
 from app.Tool import CheckEmailStr
+
+def auth_sign_in_admin(request):
+    email = request.get('email', None)
+    password = request.get('password', None)
+    print(email, password)
+
+    if not email or not password:
+        return 400, '账户或密码不正确', {}
+
+    user = AccountAdmin.query.filter_by(email=email).first()
+    if not user:
+        return 400, '账户不存在', {}
+
+    if check_password_hash(str(user.password), str(password)):
+        md5content = user.email + datetime.now().strftime("%Y%m%d%H%M%S")
+        md5 = hashlib.md5(md5content.encode()).hexdigest()
+
+        try:
+            user.token = str(md5)
+            db.session.commit()
+            if not user.head or user.head == '':
+                head = Config.SERVER_STATICLOADURL + '/user/head/' + 'default.png'
+            else:
+                head = Config.SERVER_STATICLOADURL + \
+                    '/user/head/' + str(user.head)
+            return 200, '登录成功', dict(token=md5, username=user.username, head=head)
+
+        except Exception as e:
+            print(e)
+            db.session.rollback()
+            return 502, '服务器出错', {}
+
+    return 400, '账户或密码不正确', {}
 
 def auth_sign_in(request):
     email = request.get('email', None)
@@ -171,6 +204,18 @@ def auth_verify_register_vcode(request):
     return 400, '验证码有误', {}
 
 def auth_logout(request):
+    current_account = request['current_account']
+    current_account.token = ''
+
+    try:
+        db.session.commit()
+        return 200, '退出成功', {}
+
+    except:
+        db.session.rollback()
+        return 502, '服务器出错', {}
+
+def auth_logout_admin(request):
     current_account = request['current_account']
     current_account.token = ''
 

@@ -18,7 +18,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 # 服务器地址
 HOSTQUERYTYPE = 'http'  # 协议
 RUNHOST = '127.0.0.1'   # 运行ip
-RUNPORT = 8080          # 运行端口号
+RUNPORT = 8888          # 运行端口号
 
 SERVER_GULAOBURL = HOSTQUERYTYPE + '://' + RUNHOST + ':' + str(RUNPORT)
 

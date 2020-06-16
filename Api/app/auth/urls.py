@@ -31,6 +31,22 @@ from app.Middleware import requestPOST, TokenPost
 #         return str('成功') + str(data)
 #     return str('失败')
 
+@auth.route('/sign-in/admin', methods=["POST"])
+@requestPOST
+def auth_sign_in_admin(request):
+    '''管理员登录
+    Args
+        email(str)登录邮箱
+        passport(str)登录密码
+
+    Result
+        200
+            token(str)请求token
+            username(str)用户名
+            head(str)用户头像
+    '''
+    c,m,d = views.auth_sign_in_admin(request.json)
+    return ReturnRequest(c,m,d)
 
 @auth.route('/sign-in', methods=["POST"])
 @requestPOST
@@ -136,4 +152,17 @@ def auth_logout(request):
         502 服务器出错
     '''
     c,m,d = views.auth_logout(request.json)
+    return ReturnRequest(c,m,d)
+
+@auth.route('/logout/admin', methods=["POST"])
+@TokenPost([1])
+def auth_logout_admin(request):
+    '''退出登录管理员
+    Args
+        null
+    Result
+        200 退出成功
+        502 服务器出错
+    '''
+    c,m,d = views.auth_logout_admin(request.json)
     return ReturnRequest(c,m,d)

@@ -2,7 +2,7 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <CommonContentNav background_color="#000000" button_color="#f4f4f4" button_style="1" :buttlist='buttlist'/>
+    <CommonContentNav :conttype.sync="contentType" background_color="#000000" @conttype="getList(contentType)" button_color="#f4f4f4" button_style="1" :buttlist='buttlist'/>
   </div>
 </template>
 
@@ -17,15 +17,22 @@ export default {
     return{
       buttlist:[
         {
-          name:'111',
-          link:'11111111'
+          title:'111',
+          link:'11111111',
+          conttype:1,
         }
-      ]
+      ],
+      contentType:0
     }
   },
   components: {
     HelloWorld,
     CommonContentNav
+  },
+  methods: {
+    getList(n){
+      console.log(n)
+    }
   },
   created(){
     let user = this.$authUser.getUserToken()
