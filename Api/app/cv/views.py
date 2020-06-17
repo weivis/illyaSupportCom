@@ -1,12 +1,14 @@
 from app.Models.db_Cv import CvData
 from app.Extensions import db
+from app.Config import SERVER_GULAOBURL
 
 def cv_list(request):
+    print(request)
     keyword = request.get('keyword', None)
     sfilter = request.get('sfilter', 0)
     
     if sfilter == 0:
-        querys = CvData.query.filter(CvData.isdelete == False).all()
+        querys = CvData.query.filter(CvData.isdelete == False)
 
     else:
         querys = CvData.query.filter().all()
@@ -18,7 +20,8 @@ def cv_list(request):
         {
             'id':i.id,
             'people_name':i.people_name,
-            'head':i.head
+            'head':SERVER_GULAOBURL + '/static/com/cvhead/' + i.head,
+            'filename':i.head
         } for i in querys
     ]
 

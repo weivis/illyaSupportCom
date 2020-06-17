@@ -14,20 +14,29 @@ UPLOAD_KEY_FLOAD = {
     'cvhead':'/com/cvhead',
     }
 
-# def FileCompress(files):
-#     '''图片压缩'''
-#     print('压缩')
-#     from PIL import Image
-#     # value = BytesIO()
-#     file=Image.open(files)
-#     print(file.size)
-#     # filew, fileh=openfile.size
-#     size = (530, 1000)
-#     file.thumbnail(size)
-#     file = file.crop((0, 0, 500, 300))
-#     # openfile.save(value, format="JPEG")
-#     print(file.size)
-#     return file
+def FileCompress_Head(files):
+    '''图片压缩'''
+    from PIL import Image
+    file=Image.open(files)
+
+    topw = [0,0]
+
+    xl, yl = file.size
+    print(xl, yl)
+
+    if xl > yl:
+        topw = [yl, 1]
+        print(topw)
+    else:
+        topw = [xl, 0]
+        print(topw)
+
+    px = topw[0]
+
+    file = file.crop((0, 0, px, px))
+
+    print(file.size)
+    return file
 
 def CreateNewFilename(ext):
     '''生成新的文件名'''
@@ -59,6 +68,8 @@ def upload_file(request):
     except:
         return 400, '错误: 没有文件', ''
 
+    # FileCompress_Head(file)
+
     upload_key = request.form.get('uploadKey',None)
 
     if not upload_key:
@@ -73,12 +84,12 @@ def upload_file(request):
 
     newfilename = CreateNewFilename(ext)
 
-    # if upload_key in ['article_cover']:
-    #     files = FileCompress(file)
-    # else:
-    #     files = file
+    if upload_key in ['cvhead']:
+        files = FileCompress_Head(file)
+    else:
+        files = file
 
-    files = file
+    # files = file
 
     files.save(os.path.join(os.path.abspath('app/static/' + UPLOAD_KEY_FLOAD[str(upload_key)] + "/"), newfilename))
 

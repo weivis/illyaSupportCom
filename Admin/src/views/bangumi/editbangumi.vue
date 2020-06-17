@@ -1,5 +1,81 @@
 <template>
   <div>
+
+    <el-drawer
+      title="添加CV"
+      :visible.sync="addcvdrawer"
+      :with-header="false">
+      <div style="padding: 25px;">
+
+        <el-row class="funcbuttonrow" v-if="bdcv_cvid" >已选择的CVID: {{bdcv_cvid}} , CV名: {{bdcv_cvname}}</el-row>
+
+        <el-row class="funcbuttonrow">
+          <el-input placeholder="请输入角色名" v-model="bdcv_role_sort">
+          <template slot="prepend">CV权重</template>
+          </el-input>
+        </el-row>
+
+        <el-row class="funcbuttonrow">
+          <el-input placeholder="请输入角色名" v-model="bdcv_role_name">
+          <template slot="prepend">角色名</template>
+          </el-input>
+        </el-row>
+
+      <el-row class="funcbuttonrow">
+        <el-button @click="SendBdCV()">确定</el-button>
+      </el-row>
+
+      <template>
+        <el-table
+          :data="bdcv_list"
+          style="width: 100%">
+          <el-table-column
+            prop="id"
+            label="CVID"
+            width="100">
+          </el-table-column>
+
+          <el-table-column prop="head" label="人像" width="150">
+            <template slot-scope="scope">
+              <el-image style="width: 50%; height: auto" :src="scope.row.head"></el-image>
+            </template>
+          </el-table-column>
+
+          <el-table-column prop="people_name" label="CV名"></el-table-column>
+
+      <el-table-column label="更多" width="80">
+        <template slot-scope="scope">
+          <el-button @click="bdcv_cvid = scope.row.id, bdcv_cvname = scope.row.people_name">选择</el-button>
+        </template>
+      </el-table-column>
+
+        </el-table>
+      </template>
+
+      </div>
+
+    </el-drawer>
+
+    <el-dialog title="添加播放地址" :visible.sync="dialog_addplayurl">
+      <el-row class="funcbuttonrow">被添加的番剧id:{{id}}</el-row>
+      <el-row class="funcbuttonrow">
+        <el-input placeholder="播放来源名" v-model="addplayurl_source_name">
+          <template slot="prepend">播放来源名</template>
+        </el-input>
+      </el-row>
+      <el-row class="funcbuttonrow">
+        <el-input placeholder="播放地址" v-model="addplayurl_url">
+          <template slot="prepend">播放地址</template>
+        </el-input>
+      </el-row>
+      <el-row class="funcbuttonrow">
+        <el-input placeholder="地址权重值" v-model="addplayurl_sort">
+          <template slot="prepend">地址权重值</template>
+        </el-input>
+      </el-row>
+      <el-button type="primary" @click="add_playsourceurl()">添加</el-button>
+    </el-dialog>
+
     <div class="leftbox">
       <el-row>
         <el-col class="common rwoh">
@@ -40,7 +116,7 @@
             </el-col>
 
             <el-col :span="6" class="common elmr">
-                开播时间
+              开播时间
               <el-date-picker
                 v-model="openplay_time"
                 type="date"
@@ -59,25 +135,24 @@
             </el-col>
           </el-row>
 
-        <el-row class="common rwoh">
-        <el-col class="common elmr" style="float:left; width:300px">
-        <el-radio-group v-model="classification">
-            <el-radio-button label="1">番剧</el-radio-button>
-            <el-radio-button label="2">剧场版</el-radio-button>
-            <el-radio-button label="3">OVA</el-radio-button>
-            <el-radio-button label="4">SP</el-radio-button>
-        </el-radio-group>
-        </el-col>
+          <el-row class="common rwoh">
+            <el-col class="common elmr" style="float:left; width:300px">
+              <el-radio-group v-model="classification">
+                <el-radio-button label="1">番剧</el-radio-button>
+                <el-radio-button label="2">剧场版</el-radio-button>
+                <el-radio-button label="3">OVA</el-radio-button>
+                <el-radio-button label="4">SP</el-radio-button>
+              </el-radio-group>
+            </el-col>
 
-        <el-col class="common elmr"  style="float:left; width:500px">
-            <span class>是否允许站内播放</span>
-            <el-select v-model="station_play" placeholder="请选择">
-            <el-option label="允许" :value="true"></el-option>
-            <el-option label="不开放" :value="false"></el-option>
-            </el-select>
-        </el-col>
-
-        </el-row>
+            <el-col class="common elmr" style="float:left; width:500px">
+              <span class>是否允许站内播放</span>
+              <el-select v-model="station_play" placeholder="请选择">
+                <el-option label="允许" :value="true"></el-option>
+                <el-option label="不开放" :value="false"></el-option>
+              </el-select>
+            </el-col>
+          </el-row>
         </el-col>
       </el-row>
       <div class="line"></div>
@@ -94,23 +169,34 @@
         <el-table :data="cv_list" style="width: 100%">
           <el-table-column prop label="CV头像" width="150">
             <template slot-scope="scope">
-              <el-image style="width: 90%; height: auto" :src="scope.row.head"></el-image>
+              <el-image style="width: 50%; height: auto" :src="scope.row.head"></el-image>
             </template>
           </el-table-column>
-          <el-table-column prop="id" label="ID" width="180"></el-table-column>
-          <el-table-column prop="role_name" label="角色名" width="180"></el-table-column>
-          <el-table-column prop="cv_id" label="CVID" width="180"></el-table-column>
-          <el-table-column prop="sort" label="权重" width="180"></el-table-column>
-          <el-table-column prop="people_name" label="CV名" width="180"></el-table-column>
-          <el-table-column prop="head" label="CV名" width="180"></el-table-column>
+          <el-table-column prop="id" label="ID" width="100"></el-table-column>
+          <el-table-column prop="role_name" label="角色名" width=""></el-table-column>
+          <el-table-column prop="people_name" label="CV名" width=""></el-table-column>
+          <el-table-column prop="cv_id" label="CVID" width="100"></el-table-column>
+          <el-table-column prop="sort" label="权重" width="100"></el-table-column>
+          <el-table-column label="更多" width="100">
+            <template slot-scope="scope">
+              <el-button @click="del_BDcv(scope.row.id)">删除</el-button>
+            </template>
+          </el-table-column>
         </el-table>
       </el-row>
       <div class="line"></div>
       <el-row>
         <el-table :data="playurl_tablist" style="width: 100%">
-          <el-table-column prop="date" label="日期" width="180"></el-table-column>
-          <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-          <el-table-column prop="address" label="地址"></el-table-column>
+          <el-table-column prop="id" label="ID" width="180"></el-table-column>
+          <el-table-column prop="source_name" label="来源" width="180"></el-table-column>
+          <el-table-column prop="sort" label="权重" width="180"></el-table-column>
+          <el-table-column prop="url" label="URL"></el-table-column>
+          <el-table-column label="更多" width="180">
+            <template slot-scope="scope">
+              <el-button @click="change(scope.row.id)">编辑</el-button>
+              <el-button @click="del_playsourceurl(scope.row.id)">删除</el-button>
+            </template>
+          </el-table-column>
         </el-table>
       </el-row>
     </div>
@@ -125,16 +211,16 @@
         <el-button @click="save()">保存</el-button>
       </el-row>
       <el-row class="funcbuttonrow">
-        <el-button>添加CV</el-button>
+        <el-button @click="BdCV()">添加CV</el-button>
       </el-row>
       <el-row class="funcbuttonrow">
-        <el-button>添加播放地址</el-button>
+        <el-button @click="dialog_addplayurl = true">添加播放地址</el-button>
       </el-row>
       <el-row class="funcbuttonrow">
-        <el-button>上架</el-button>
+        <el-button @click="change(id,1)">上架</el-button>
       </el-row>
       <el-row class="funcbuttonrow">
-        <el-button>下架</el-button>
+        <el-button @click="change(id,2)">下架</el-button>
       </el-row>
     </div>
   </div>
@@ -159,13 +245,112 @@ export default {
       sort: "",
       status: "",
       playurl_tablist: [],
-      cv_list: []
+      cv_list: [],
+      dialog_addplayurl: false,
+      addplayurl_source_name: "",
+      addplayurl_url: "",
+      addplayurl_sort: "",
+      addcvdrawer: false,
+
+      bdcv_cvid:'',
+      bdcv_cvname: '',
+      bdcv_role_sort:0,
+      bdcv_role_name: '',
+      bdcv_list:[]
+
     };
   },
   created() {
     this.query(this.$route.query.id);
   },
   methods: {
+    getBdCVList() {
+      this.$http
+        .cvList({
+        })
+        .then(response => {
+          if (response.code == 200) {
+            this.bdcv_list = response.data;
+          }
+        })
+        .catch(error => {
+          console.log("error", error);
+        });
+    },
+    BdCV(){
+      this.getBdCVList()
+      this.addcvdrawer = true
+    },
+    del_BDcv(id){
+      this.$http
+        .BangumiCvDel({
+            id: id,
+        })
+        .then(response => {
+          if (response.code == 200) {
+            this.query(this.id);
+          }
+        })
+        .catch(error => {
+          console.log("error", error);
+        });
+    },
+    SendBdCV(){
+      this.$http
+        .BangumiCvAddoredit({
+            bangumi_id: this.id,
+            cv_id: this.bdcv_cvid,
+            sort: this.bdcv_role_sort,
+            role_name: this.bdcv_role_name
+        })
+        .then(response => {
+          if (response.code == 200) {
+            this.query(this.id);
+            this.bdcv_cvid = ''
+            this.bdcv_role_sort = 0
+            this.bdcv_role_name = ''
+            this.addcvdrawer = false
+          }
+        })
+        .catch(error => {
+          console.log("error", error);
+        });
+    },
+    del_playsourceurl(id) {
+      this.$http
+        .bangumiPlayurlDel({
+            id:id
+        })
+        .then(response => {
+          if (response.code == 200) {
+            this.query(this.id);
+          }
+        })
+        .catch(error => {
+          console.log("error", error);
+        });
+    },
+    add_playsourceurl() {
+      this.$http
+        .bangumiPlayurlAddOrEdit({
+          url: this.addplayurl_url,
+          source_name: this.addplayurl_source_name,
+          bangumi_id: this.id,
+          sort: this.addplayurl_sort
+        })
+        .then(response => {
+          if (response.code == 200) {
+            this.dialog_addplayurl = false;
+            this.addplayurl_source_name = "";
+            this.addplayurl_url = "";
+            this.addplayurl_sort = "";
+            this.query(this.id);
+          }
+        })
+        .catch(error => {
+          console.log("error", error);
+        });
+    },
     query(id) {
       this.$http
         .bangumiInfo(id)
@@ -215,7 +400,7 @@ export default {
         .bangumiChange(id, types, 0)
         .then(response => {
           if (response.code == 200) {
-            this.getList(this.types, this.currentPage);
+            this.query(this.id);
           }
         })
         .catch(error => {
@@ -224,18 +409,18 @@ export default {
     },
     save() {
       let data = {
-          id: this.id,
-          classification: this.classification,
-          openplay_time: this.openplay_time,
-          name: this.name,
-          setscount: this.setscount,
-          introduce: this.introduce,
-          cover: this.cover,
-          upstatus: this.upstatus,
-          staff: this.staff,
-          station_play: this.station_play,
-          status: this.status,
-          sort: this.sort
+        id: this.id,
+        classification: this.classification,
+        openplay_time: this.openplay_time,
+        name: this.name,
+        setscount: this.setscount,
+        introduce: this.introduce,
+        cover: this.cover,
+        upstatus: this.upstatus,
+        staff: this.staff,
+        station_play: this.station_play,
+        status: this.status,
+        sort: this.sort
       };
       this.$http
         .bangumiAddOrEdit(data)
@@ -251,8 +436,15 @@ export default {
   }
 };
 </script>
-
+<style>
+.el-upload-dragger{
+    height: 300px!important;
+    width: 230px!important;
+    z-index: 1000;
+  }
+</style>
 <style lang="scss" scoped>
+
 .leftbox {
   width: calc(100% - 230px);
   position: relative;

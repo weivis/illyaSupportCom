@@ -36,10 +36,10 @@ def bangumi_list(request):
             'identification':i.identification,
             'name':i.name,
             'setscount':i.setscount,
-            'introduce':i.introduce,
+            'introduce':i.introduce[0:50],
             'cover':SERVER_GULAOBURL + '/static/com/bangumicover/' + i.cover,
             'upstatus':i.upstatus,
-            'staff':i.staff,
+            # 'staff':i.staff,
             'status':i.status,
             'station_play':i.station_play,
             'openplay_time':i.openplay_time.strftime("%Y-%m-%d"),
@@ -96,7 +96,7 @@ def bangumi_info(request):
         'cv_id':i.cv_id,
         'sort':i.sort,
         'people_name': CvData.query.filter_by(id=i.cv_id).first().people_name,
-        'head':CvData.query.filter_by(id=i.cv_id).first().head
+        'head':SERVER_GULAOBURL + '/static/com/cvhead/' + CvData.query.filter_by(id=i.cv_id).first().head if CvData.query.filter_by(id=i.cv_id).first() else ''
     }for i in cvdata]
 
     return 200, 'ok', {

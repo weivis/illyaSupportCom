@@ -168,7 +168,7 @@ def Bangumi_cv_addoredit(request):
         msg:    消息
         data:   null
     '''
-    c,m,d = views.bangumi_playurl_del(request.json)
+    c,m,d = views.Bangumi_cv_addoredit(request.json)
     return ReturnRequest(c,m,d)
 
 @bangumi.route('/cv/del', methods=["POST"])

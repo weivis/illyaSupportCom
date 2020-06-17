@@ -37,16 +37,22 @@ const routes = [
         meta: {title:'添加番剧'}
       },
       {
-        path: 'cv',
-        name: 'cvlist',
-        component: () => import('@/views/bangumi/cv.vue'),
-        meta: {title:'CV管理'}
-      },
-      {
         path: 'edit',
         name: 'editbangumi',
         component: () => import('@/views/bangumi/editbangumi.vue'),
         meta: {title:'CV管理'}
+      },
+    ]
+  },
+  {
+    path: '/cv',
+    component: Layout,
+    children: [
+      {
+        path: '/',
+        name: 'cvlist',
+        component: () => import('@/views/cv/list.vue'),
+        meta: {title:'番剧管理'}
       },
     ]
   },

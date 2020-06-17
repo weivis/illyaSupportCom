@@ -14,43 +14,50 @@
         </template>
           <router-link to="/bangumi/list"><el-menu-item index="1-1">番剧管理</el-menu-item></router-link>
           <router-link to="/bangumi/add"><el-menu-item index="1-2">发布新番剧</el-menu-item></router-link>
-          <router-link to="/bangumi/cv"><el-menu-item index="1-3">CV管理</el-menu-item></router-link>
       </el-submenu>
 
       <el-submenu index="2">
         <template slot="title">
           <i class="el-icon-location"></i>
-          <span>文章</span>
+          <span>CV管理</span>
         </template>
-          <el-menu-item index="2-1">发布新文章</el-menu-item>
-          <el-menu-item index="2-2">现有文章管理</el-menu-item>
+          <router-link to="/cv/"><el-menu-item index="1-1">CV管理</el-menu-item></router-link>
       </el-submenu>
 
       <el-submenu index="3">
         <template slot="title">
           <i class="el-icon-location"></i>
-          <span>用户评论管理</span>
+          <span>文章</span>
         </template>
-          <el-menu-item index="3-1">举报管理</el-menu-item>
-          <el-menu-item index="3-2">已处理的评论</el-menu-item>
+          <el-menu-item index="3-1">发布新文章</el-menu-item>
+          <el-menu-item index="3-2">现有文章管理</el-menu-item>
       </el-submenu>
 
       <el-submenu index="4">
         <template slot="title">
           <i class="el-icon-location"></i>
-          <span>资源区</span>
+          <span>用户评论管理</span>
         </template>
-          <el-menu-item index="4-1">资源管理</el-menu-item>
-          <el-menu-item index="4-1">反馈处理</el-menu-item>
+          <el-menu-item index="4-1">举报管理</el-menu-item>
+          <el-menu-item index="4-2">已处理的评论</el-menu-item>
       </el-submenu>
 
       <el-submenu index="5">
         <template slot="title">
           <i class="el-icon-location"></i>
+          <span>资源区</span>
+        </template>
+          <el-menu-item index="5-1">资源管理</el-menu-item>
+          <el-menu-item index="5-2">反馈处理</el-menu-item>
+      </el-submenu>
+
+      <el-submenu index="6">
+        <template slot="title">
+          <i class="el-icon-location"></i>
           <span>视频管理</span>
         </template>
-          <el-menu-item index="5-1">视频管理</el-menu-item>
-          <el-menu-item index="5-1">被退回的稿件</el-menu-item>
+          <el-menu-item index="6-1">视频管理</el-menu-item>
+          <el-menu-item index="6-2">被退回的稿件</el-menu-item>
       </el-submenu>
 
     </el-menu>
