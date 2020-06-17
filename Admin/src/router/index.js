@@ -40,7 +40,7 @@ const routes = [
         path: 'edit',
         name: 'editbangumi',
         component: () => import('@/views/bangumi/editbangumi.vue'),
-        meta: {title:'CV管理'}
+        meta: {title:'编辑番剧信息'}
       },
     ]
   },
@@ -52,7 +52,31 @@ const routes = [
         path: '/',
         name: 'cvlist',
         component: () => import('@/views/cv/list.vue'),
-        meta: {title:'番剧管理'}
+        meta: {title:'CV管理'}
+      },
+    ]
+  },
+  {
+    path: '/article',
+    component: Layout,
+    children: [
+      {
+        path: 'list',
+        name: 'articlelist',
+        component: () => import('@/views/article/list.vue'),
+        meta: {title:'文章管理'}
+      },
+      {
+        path: 'add',
+        name: 'articleadd',
+        component: () => import('@/views/article/add.vue'),
+        meta: {title:'添加文章'}
+      },
+      {
+        path: 'edit',
+        name: 'articleedit',
+        component: () => import('@/views/article/edit.vue'),
+        meta: {title:'编辑文章'}
       },
     ]
   },

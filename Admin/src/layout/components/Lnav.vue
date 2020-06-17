@@ -29,8 +29,8 @@
           <i class="el-icon-location"></i>
           <span>文章</span>
         </template>
-          <el-menu-item index="3-1">发布新文章</el-menu-item>
-          <el-menu-item index="3-2">现有文章管理</el-menu-item>
+          <router-link to="/article/add"><el-menu-item index="3-1">发布新文章</el-menu-item></router-link>
+          <router-link to="/article/list"><el-menu-item index="3-2">管理文章</el-menu-item></router-link>
       </el-submenu>
 
       <el-submenu index="4">
@@ -47,8 +47,9 @@
           <i class="el-icon-location"></i>
           <span>资源区</span>
         </template>
-          <el-menu-item index="5-1">资源管理</el-menu-item>
-          <el-menu-item index="5-2">反馈处理</el-menu-item>
+          <el-menu-item index="5-1">发布新资源</el-menu-item>
+          <el-menu-item index="5-2">资源管理</el-menu-item>
+          <el-menu-item index="5-3">反馈处理</el-menu-item>
       </el-submenu>
 
       <el-submenu index="6">

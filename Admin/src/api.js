@@ -17,6 +17,45 @@ export function upload(data) {
 
 // Article-----------------------------------------------------------------------------------------------------
 
+//添加文章或编辑文章
+export function ArticleAddoredit(data) {
+    return request({
+        url: '/article/addoredit',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+//文章列表
+export function ArticleList(data) {
+    return request({
+        url: '/article/list',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+//文章信息
+export function ArticleInfo(id) {
+    return request({
+        url: '/article/info',
+        method: 'post',
+        data: {
+            id:id
+        }
+    })
+}
+
+//更改文章状态和排序
+export function ArticleChange(data) {
+    return request({
+        url: '/article/change',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+
 // Auth--------------------------------------------------------------------------------------------------------
 
 // 登录

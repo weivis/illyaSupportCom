@@ -52,6 +52,8 @@ def _Paginate(querys, query_page, per_page=10):
             count, items, page, pages
             总数 结果 当前页数 总页数
     '''
+    if query_page == 0:
+        query_page = 1
     count = querys.count()
     _paginate = querys.paginate(query_page, per_page=per_page)
     return count, _paginate.items, _paginate.page, _paginate.pages

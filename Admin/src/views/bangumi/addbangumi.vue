@@ -158,7 +158,7 @@ export default {
     upLoad(file) {
       const formData = new FormData();
       formData.append("file", file.file);
-      formData.append("uploadKey", "bangumicover");
+      formData.append("uploadKey", "articlecover");
 
       console.log(file);
       this.$http.upload(formData).then(res => {

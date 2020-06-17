@@ -1,7 +1,11 @@
 from app.Models.db_Article import ArticleData
 from app.Common import Generate_identification
+from app.Tool import _Paginate
+from app.Extensions import db
+from app.Config import SERVER_GULAOBURL
 
 def article_list(request):
+    print(request)
     types = request.get('types', 0)
     pages = request.get('pages', 1)
     sfilter = request.get('sfilter', 0)
@@ -30,7 +34,7 @@ def article_list(request):
         'classification':i.classification,
         'identification':i.identification,
         'title':i.title,
-        'cover':i.cover,
+        'cover':SERVER_GULAOBURL + '/static/com/article/cover/' + i.cover,
         'introduce':i.introduce,
         'sort':i.sort,
         'status':i.status,
@@ -47,7 +51,7 @@ def article_info(request):
     if not id:
         return 400, 'id不能为空', {}
 
-    i = ArticleData.query.filter_by(id=id)
+    i = ArticleData.query.filter_by(id=id).first()
     if not i:
         return 401, '文章不存在', {}
 
@@ -56,7 +60,8 @@ def article_info(request):
         'classification':i.classification,
         'identification':i.identification,
         'title':i.title,
-        'cover':i.cover,
+        'cover':SERVER_GULAOBURL + '/static/com/article/cover/' + i.cover,
+        'file':i.cover,
         'introduce':i.introduce,
         'sort':i.sort,
         'status':i.status,
@@ -68,6 +73,7 @@ def article_info(request):
     return 200, 'ok', result
 
 def article_addoredit(request):
+    print(request)
     id = request.get('id',None)
     classification = request.get('classification',None)
     title = request.get('title',None)
@@ -103,8 +109,10 @@ def article_addoredit(request):
     obj.cover = cover
     obj.introduce = introduce
     obj.content = content
-    obj.status = 2 # 默认状态是下架
-    obj.sort = 0 # 默认权重是0
+
+    if not id:
+        obj.status = 2 # 默认状态是下架
+        obj.sort = 0 # 默认权重是0
 
     try:
         if not id:
@@ -130,7 +138,7 @@ def article_change(request):
     if not changeto:
         return 400, '操作不能为空', {}
 
-    obj = Article.query.filter(Article.id == id).first()
+    obj = ArticleData.query.filter(ArticleData.id == id).first()
 
     if not obj:
         return 400, '文章不存在', {}
@@ -157,6 +165,10 @@ def article_change(request):
         sort = request.get('sort',None)
         if not sort:
             return 400, '新的权重值不能为空 最小值为0', {}
+        obj.sort = sort
+
+    if changeto == 5:
+        db.session.delete(obj)
 
     try:
         db.session.commit()

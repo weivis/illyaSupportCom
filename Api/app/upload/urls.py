@@ -10,11 +10,6 @@ def upload_file(request):
         参数
             file : file
             uploadKey : 上传的key值(问后端要 不同的上传文件 调用的地方 用的key值都不一样)
-                'userhead':'/com/userhead',
-                'bangumicover':'/com/bangumicover',
-                'albumcover':'/com/albumcover',
-                'articlecover':'/com/articlecover',
-                'cvhead':'/com/cvhead',
         return
             ospath : 系统内的储存位置 如: /static/xxx.jpg
             lodpath : 可加载地址 如 http:www.xxx.com/static/xxx.jpg
