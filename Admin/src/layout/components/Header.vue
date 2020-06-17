@@ -22,7 +22,8 @@
         name:'Header',
         data(){
             return{
-                logo:this.$ServerHttpUrl + '/static/admin/image/logo.png'
+                logo:this.$ServerHttpUrl + '/static/admin/image/logo.png',
+                activeIndex:'1'
             }
         },
         methods: { //事件处理器

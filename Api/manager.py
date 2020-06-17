@@ -42,7 +42,7 @@ def create_admin(email ,password, username):
 
 
 manager.add_command('db',MigrateCommand)
-manager.add_command("runserver", Server(host=Config.RUNHOST, port=Config.RUNPORT, use_debugger=Config.USEFLASKDEBUG))
+manager.add_command("runserver", Server(host=Config.RUNHOST, port=Config.RUNPORT, use_debugger=True)) #use_debugger=Config.USEFLASKDEBUG
 
 if __name__ == '__main__':
     manager.run()

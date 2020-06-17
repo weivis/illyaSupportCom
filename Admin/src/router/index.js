@@ -18,11 +18,35 @@ const routes = [
         component: () => import('@/views/Home.vue'),
         meta: {title:'首页'}
       },
+    ]
+  },
+  {
+    path: '/bangumi',
+    component: Layout,
+    children: [
       {
-        path: '/album',
-        name: 'album',
-        component: () => import('@/views/album/'),
-        meta: {title:'资源'}
+        path: 'list',
+        name: 'listbangumi',
+        component: () => import('@/views/bangumi/listbangumi.vue'),
+        meta: {title:'番剧管理'}
+      },
+      {
+        path: 'add',
+        name: 'addbangumi',
+        component: () => import('@/views/bangumi/addbangumi.vue'),
+        meta: {title:'添加番剧'}
+      },
+      {
+        path: 'cv',
+        name: 'cvlist',
+        component: () => import('@/views/bangumi/cv.vue'),
+        meta: {title:'CV管理'}
+      },
+      {
+        path: 'edit',
+        name: 'editbangumi',
+        component: () => import('@/views/bangumi/editbangumi.vue'),
+        meta: {title:'CV管理'}
       },
     ]
   },

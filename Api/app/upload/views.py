@@ -78,10 +78,12 @@ def upload_file(request):
     # else:
     #     files = file
 
+    files = file
+
     files.save(os.path.join(os.path.abspath('app/static/' + UPLOAD_KEY_FLOAD[str(upload_key)] + "/"), newfilename))
 
     return 200, 'ok', {
         'lodpath': SERVER_GULAOBURL + '/static/' + UPLOAD_KEY_FLOAD[str(upload_key)] + '/' + newfilename,
         'ospath': UPLOAD_KEY_FLOAD[str(upload_key)] + '/' + newfilename,
-        'filename': filename
+        'filename': newfilename
     }

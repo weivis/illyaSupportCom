@@ -12,9 +12,9 @@
           <i class="el-icon-location"></i>
           <span>番剧</span>
         </template>
-          <el-menu-item index="1-1">发布新番剧</el-menu-item>
-          <el-menu-item index="1-2">剧集管理</el-menu-item>
-          <el-menu-item index="1-3">CV管理</el-menu-item>
+          <router-link to="/bangumi/list"><el-menu-item index="1-1">番剧管理</el-menu-item></router-link>
+          <router-link to="/bangumi/add"><el-menu-item index="1-2">发布新番剧</el-menu-item></router-link>
+          <router-link to="/bangumi/cv"><el-menu-item index="1-3">CV管理</el-menu-item></router-link>
       </el-submenu>
 
       <el-submenu index="2">
