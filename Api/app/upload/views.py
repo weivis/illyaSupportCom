@@ -8,8 +8,8 @@ from app.Config import SERVER_GULAOBURL
 # 关于 UPLOAD_KEY_FLOAD的用法
 UPLOAD_KEY_FLOAD = {
     'userhead':'/com/userhead',
-    'bangumicover':'/com/bangumicover',
-    'albumcover':'/com/albumcover',
+    'bangumicover':'/com/bangumi/cover',
+    'albumcover':'/com/album/cover',
     'cvhead':'/com/cvhead',
     'articleimg':'/com/article/img',
     'articlecover':'/com/article/cover'

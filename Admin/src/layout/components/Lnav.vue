@@ -47,9 +47,9 @@
           <i class="el-icon-location"></i>
           <span>资源区</span>
         </template>
-          <el-menu-item index="5-1">发布新资源</el-menu-item>
-          <el-menu-item index="5-2">资源管理</el-menu-item>
-          <el-menu-item index="5-3">反馈处理</el-menu-item>
+          <router-link to="/album/add"><el-menu-item index="5-1">发布新资源</el-menu-item></router-link>
+          <router-link to="/album/list"><el-menu-item index="5-2">资源管理</el-menu-item></router-link>
+          <router-link to="/album/feedback"><el-menu-item index="5-3">反馈处理</el-menu-item></router-link>
       </el-submenu>
 
       <el-submenu index="6">

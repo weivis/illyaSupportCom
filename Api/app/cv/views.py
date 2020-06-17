@@ -70,7 +70,7 @@ def cv_del(request):
         return 400, '对象不存在或id有误', {}
 
     try:
-        obj.isdelete = True
+        db.session.delete(obj)
         db.session.commit()
         return 200, '', {}
 

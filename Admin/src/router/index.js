@@ -81,6 +81,36 @@ const routes = [
     ]
   },
   {
+    path: '/album',
+    component: Layout,
+    children: [
+      {
+        path: 'list',
+        name: 'listalbum',
+        component: () => import('@/views/album/list.vue'),
+        meta: {title:'资源管理'}
+      },
+      {
+        path: 'add',
+        name: 'addalbum',
+        component: () => import('@/views/album/add.vue'),
+        meta: {title:'添加资源'}
+      },
+      {
+        path: 'edit',
+        name: 'editalbum',
+        component: () => import('@/views/album/edit.vue'),
+        meta: {title:'编辑资源信息'}
+      },
+      {
+        path: 'feedback',
+        name: 'feedbackalbum',
+        component: () => import('@/views/album/feedback.vue'),
+        meta: {title:'反馈处理'}
+      },
+    ]
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/Login/')

@@ -15,6 +15,78 @@ export function upload(data) {
 
 // Album-------------------------------------------------------------------------------------------------------
 
+//添加资源和编辑资源
+export function AlbumAddOrEdit(data) {
+    return request({
+        url: '/album/addoredit',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+//更改资源状态
+export function AlbumChange(data) {
+    return request({
+        url: '/album/change',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+//新增资源下载地址和编辑
+export function AlbumDowurlAddOrEdit(data) {
+    return request({
+        url: '/album/dowurl/addoredit',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+//删除资源下载列表的某一项
+export function AlbumDowurlDel(data) {
+    return request({
+        url: '/album/dowurl/del',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+//资源列表
+export function AlbumList(data) {
+    return request({
+        url: '/album/list',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+//资源详细信息
+export function AlbumInfo(data) {
+    return request({
+        url: '/album/info',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+//获取资源的下载列表
+export function AlbumDowurlList(data) {
+    return request({
+        url: '/album/dowurl/list',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+//更改资源下载的反馈状态
+export function AlbumDowurlChange(data) {
+    return request({
+        url: '/album/dowurl/feedback',
+        method: 'post',
+        data: data || {}
+    })
+}
+
 // Article-----------------------------------------------------------------------------------------------------
 
 //添加文章或编辑文章
