@@ -5,6 +5,7 @@ import store from './store'
 
 import ElementUI from 'element-ui'
 import locale from 'element-ui/lib/locale/lang/zh-CN' // lang i18n
+import { Message } from 'element-ui'
 
 import * as api from './api'
 import * as auth from './utils/auth'
@@ -19,6 +20,7 @@ Vue.config.productionTip = false
 Vue.prototype.$http = api
 Vue.prototype.$authUser = auth
 Vue.prototype.$ServerHttpUrl = 'http://127.0.0.1:8888/'
+Vue.prototype.$VueMessage = Message
 
 // auth.removeUserToken()
 

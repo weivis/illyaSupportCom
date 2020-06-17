@@ -81,7 +81,7 @@
 
               <el-table-column label="更多" width="200">
                 <template slot-scope="scope">
-                  <el-button size="mini"><a :href="'edit?id=' + scope.row.id" target="_blank">详细</a></el-button>
+                  <a :href="'edit?id=' + scope.row.id" target="_blank" style="margin-right: 15px;"><el-button size="mini">详情</el-button></a>
                   <el-button size="mini" @click="change(scope.row.id,2)" v-if="scope.row.status == 1" type="success">下架</el-button>
                   <el-button size="mini" @click="change(scope.row.id,1)" v-if="scope.row.status == 2" type="info">上架</el-button>
                 </template>

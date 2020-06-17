@@ -75,6 +75,11 @@
         },
         created() { //生命周期函数
         },
+        data(){
+          return{
+            active:1
+          }
+        },
         methods: {
             handleOpen(key, keyPath) {
                 console.log(key, keyPath);

@@ -222,6 +222,9 @@
       <el-row class="funcbuttonrow">
         <el-button @click="change(id,2)">下架</el-button>
       </el-row>
+      <el-row class="funcbuttonrow">
+        <el-button @click="del(id,2)">删除</el-button>
+      </el-row>
     </div>
   </div>
 </template>
@@ -398,6 +401,18 @@ export default {
     change(id, types) {
       this.$http
         .bangumiChange(id, types, 0)
+        .then(response => {
+          if (response.code == 200) {
+            this.query(this.id);
+          }
+        })
+        .catch(error => {
+          console.log("error", error);
+        });
+    },
+    del(id, types) {
+      this.$http
+        .bangumiChange(id, types, 'del')
         .then(response => {
           if (response.code == 200) {
             this.query(this.id);
