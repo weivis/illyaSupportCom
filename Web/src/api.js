@@ -67,6 +67,30 @@ export function authLogout() {
 
 // Bangumi-----------------------------------------------------------------------------------------------------
 
+//番剧列表
+export function bangumiList(types, pages, sfilter) {
+    return request({
+        url: '/bangumi/list',
+        method: 'post',
+        data: {
+            types: types,
+            pages: pages,
+            sfilter: sfilter
+        }
+    })
+}
+
+//获取详细番剧信息
+export function bangumiInfo(id) {
+    return request({
+        url: '/bangumi/info',
+        method: 'post',
+        data: {
+            id: id
+        }
+    })
+}
+
 // Bbs---------------------------------------------------------------------------------------------------------
 
 // Comment-----------------------------------------------------------------------------------------------------

@@ -36,7 +36,7 @@ def bangumi_list(request):
             'identification':i.identification,
             'name':i.name,
             'setscount':i.setscount,
-            'introduce':i.introduce[0:50],
+            'introduce':i.introduce,
             'cover':SERVER_GULAOBURL + '/static/com/bangumi/cover/' + i.cover,
             'upstatus':i.upstatus,
             # 'staff':i.staff,

@@ -18,15 +18,27 @@ const routes = [
         name: 'Home',
         component: () => import('@/views/Home.vue'),
         meta: {title:'首页'}
+      }
+    ]
+  },
+  {
+    path: '/bangumi',
+    component: Layout,
+    children: [
+      {
+        path: '/',
+        name: 'listbangumi',
+        component: () => import('@/views/bangumi/index.vue'),
+        meta: {title:'番剧'}
       },
       {
-        path: '/album',
-        name: 'Home',
-        component: () => import('@/views/album/'),
-        meta: {title:'首页'}
+        path: 'info',
+        name: 'listbangumi',
+        component: () => import('@/views/bangumi/info.vue'),
+        meta: {title:'番剧详细信息'}
       },
     ]
-  }
+  },
 ]
 
 const router = new VueRouter({

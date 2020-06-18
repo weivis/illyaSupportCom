@@ -90,7 +90,7 @@ export default {
       currentPage: 1, // 当前页码
       totalItem: 0, // 总条目
       totalPage: 0, // 总页数
-      pageSize: 15, // 每页多少条
+      pageSize: 10, // 每页多少条
       xzid: '',
       dialogVisible: false,
       editsort: 0

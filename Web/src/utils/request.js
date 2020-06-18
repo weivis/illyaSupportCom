@@ -2,20 +2,22 @@ import axios from 'axios'
 import { Message } from 'element-ui'
 import router from '../router'
 
-let HttpRoot = 'http://illya-support.weivird.com/api'
+// let HttpRoot = 'http://illya-support.weivird.com/api'
+let HttpRoot = 'http://127.0.0.1:8888/api'
 
 // 创建axios实例
 const service = axios.create({
   baseURL: HttpRoot, // api 的 base_url
-  timeout: 5000, // 请求超时时间
+  timeout: 50000, // 请求超时时间
 })
 
 // request拦截器
 service.interceptors.request.use(
   config => {
-    let user = this.$authUser.getUserToken()
-    if (user) {
-      config.headers['Token'] = user // 让每个请求携带自定义token 请根据实际情况自行修改
+    var Authorization = window.localStorage.getItem('illyaComAdminToken') ? window.localStorage.getItem('illyaComAdminToken') : '';
+    console.log('Authorization',Authorization)
+    if (Authorization) {
+      config.headers['Token'] = Authorization // 让每个请求携带自定义token 请根据实际情况自行修改
     }
     return config
   },

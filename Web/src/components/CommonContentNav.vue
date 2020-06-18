@@ -1,4 +1,5 @@
 <!--
+    import CommonContentNav from "@/components/CommonContentNav.vue";
     <CommonContentNav :conttype.sync="contentType" @conttype="getList(contentType, currentPage)" button_style="0" :buttlist='buttlist'/>
     buttlist:[
       { title:'全部', conttype:0 },
@@ -76,5 +77,14 @@ export default {
     .button-active{background-color:#0084ff; color: #fff}
     .CommonContentNav.AllWidth{width: 100%;}
     .CommonContentNav.ContentWidth{padding-top: 28px;padding-bottom: 28px;margin: 0 auto !important;}
-    .CommonContentNav.button{margin-left: 0;margin-right: 25px;}
+    .CommonContentNav.button{margin-left: 0;margin-right: 25px;font-weight: bold;}
+@media screen and (max-width: 1600px) {
+}
+
+@media screen and (max-width: 1200px) {
+}
+
+@media screen and (max-width: 600px) {
+  .CommonContentNav.button{margin-right: 10px;}
+}
 </style>
