@@ -1,21 +1,23 @@
 from app.Models.db_Album import AlbumData, AlbumDowurl
 from app.Models.db_Bangumi import BangumiAnime
 from app.Common import Generate_identification
+from app.Tool import _Paginate
+from app.Extensions import db
+from app.Config import SERVER_GULAOBURL
 
 def album_list(request):
+    print(request)
     types = request.get('types', 0)
     pages = request.get('pages', 1)
     sfilter = request.get('sfilter', 0)
 
     if sfilter == 0:
         data = AlbumData.query.filter_by(status=1).order_by(
-            AlbumData.create_time.desc(),
-            AlbumData.sort.desc()
+            AlbumData.create_time.desc()
             )
     else:
         data = AlbumData.query.filter().order_by(
-            AlbumData.create_time.desc(),
-            AlbumData.sort.desc()
+            AlbumData.create_time.desc()
             )
 
     if types != 0:
@@ -28,7 +30,7 @@ def album_list(request):
         'classification':i.classification,
         'identification':i.identification,
         'name':i.name,
-        'cover':i.cover,
+        'cover':SERVER_GULAOBURL + '/static/com/album/cover/' + i.cover,
         'introduce':i.introduce,
         'status':i.status,
         'show_index':i.show_index,
@@ -81,6 +83,7 @@ def album_add_or_edit(request):
     cover = request.get('cover',None)
     introduce = request.get('introduce',None)
     relation_bangumi_id = request.get('relation_bangumi_id',None)
+    classification = request.get('classification',None)
 
     if not name:
         return 400, '资源名不能为空', {}
@@ -110,7 +113,8 @@ def album_add_or_edit(request):
     obj.introduce = introduce
     obj.status = 2
     obj.show_index = False
-    obj.relation_bangumi_id = int(relation_bangumi_id)
+    if relation_bangumi_id:
+        obj.relation_bangumi_id = int(relation_bangumi_id)
 
     try:
         if not id:
@@ -135,7 +139,7 @@ def album_change(request):
     if not changeto:
         return 400, '操作不能为空', {}
 
-    obj = AlbumData.query.filter(Article.id == id).first()
+    obj = AlbumData.query.filter(AlbumData.id == id).first()
 
     if not obj:
         return 400, '资源不存在', {}
@@ -157,6 +161,9 @@ def album_change(request):
             obj.is_delete = True
         else:
             obj.is_delete = False
+
+    if changeto == 4:
+        db.session.delete(obj)
 
     try:
         db.session.commit()
