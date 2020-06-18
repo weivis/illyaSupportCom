@@ -46,7 +46,7 @@ def album_info(request):
     if not id:
         return 400, 'id不能为空', {}
 
-    i = AlbumData.query.filter_by(id=id)
+    i = AlbumData.query.filter_by(id=id).first()
     if not i:
         return 401, '资源不存在', {}
 
@@ -55,7 +55,8 @@ def album_info(request):
         'classification':i.classification,
         'identification':i.identification,
         'name':i.name,
-        'cover':i.cover,
+        'cover':SERVER_GULAOBURL + '/static/com/album/cover/' + i.cover,
+        'file':i.cover,
         'introduce':i.introduce,
         'status':i.status,
         'show_index':i.show_index,
@@ -118,7 +119,7 @@ def album_add_or_edit(request):
 
     try:
         if not id:
-            obj.identification = Generate_identification('bangumi')
+            obj.identification = Generate_identification('album')
             db.session.add(obj)
         db.session.commit()
         return 200, '', {}
