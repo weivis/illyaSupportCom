@@ -69,7 +69,7 @@ def album_info(request):
             relation_bangumi = {
                 'id':relation_bangumidata.id,
                 'name':relation_bangumidata.name,
-                'cover':relation_bangumidata.cover
+                'cover':SERVER_GULAOBURL + '/static/com/bangumi/cover/' + relation_bangumidata.cover
             }
     else:
         relation_bangumi = {}
@@ -79,6 +79,7 @@ def album_info(request):
     }
 
 def album_add_or_edit(request):
+    print(request)
     id = request.get('id',None)
     name = request.get('name',None)
     cover = request.get('cover',None)
@@ -112,13 +113,13 @@ def album_add_or_edit(request):
     obj.name = name
     obj.cover = cover
     obj.introduce = introduce
-    obj.status = 2
     obj.show_index = False
     if relation_bangumi_id:
         obj.relation_bangumi_id = int(relation_bangumi_id)
 
     try:
         if not id:
+            obj.status = 2
             obj.identification = Generate_identification('album')
             db.session.add(obj)
         db.session.commit()
@@ -165,6 +166,41 @@ def album_change(request):
 
     if changeto == 4:
         db.session.delete(obj)
+
+    if changeto == 5:
+        obj.relation_bangumi_id = None
+
+    try:
+        db.session.commit()
+        return 200, '', {}
+
+    except Exception as e:
+        print(e)
+        db.session.rollback()
+        return 502, '服务器出错', {}
+
+def album_bind_bangumi(request):
+    id = request.get('id',None)
+
+    if not id:
+        return 400, '资源id不能为空', {}
+
+    bangumiid = request.get('bangumiid',None)
+
+    if not bangumiid:
+        return 400, '番剧id不能为空', {}
+
+    obj = AlbumData.query.filter(AlbumData.id == id).first()
+
+    if not obj:
+        return 400, '资源不存在', {}
+
+    bangumi = BangumiAnime.query.filter(BangumiAnime.id == bangumiid).first()
+
+    if not bangumi:
+        return 400, '番剧不存在', {}
+
+    obj.relation_bangumi_id = bangumi.id
 
     try:
         db.session.commit()

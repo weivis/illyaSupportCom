@@ -20,7 +20,7 @@ Vue.config.productionTip = false
 Vue.prototype.$http = api
 Vue.prototype.$authUser = auth
 Vue.prototype.$ServerHttpUrl = 'http://127.0.0.1:8888/'
-Vue.prototype.$VueMessage = Message
+Vue.prototype.$Message = Message
 
 // auth.removeUserToken()
 

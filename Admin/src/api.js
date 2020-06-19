@@ -33,6 +33,15 @@ export function AlbumChange(data) {
     })
 }
 
+//绑定番剧
+export function AlbumBindBangumi(data) {
+    return request({
+        url: '/album/bind/bangumi',
+        method: 'post',
+        data: data || {}
+    })
+}
+
 //新增资源下载地址和编辑
 export function AlbumDowurlAddOrEdit(data) {
     return request({

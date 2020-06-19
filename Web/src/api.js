@@ -28,6 +28,26 @@ export function AlbumInfo(id) {
     })
 }
 
+//获取资源的下载列表
+export function AlbumDowurlList(data) {
+    return request({
+        url: '/album/dowurl/list',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+//反馈资源下载问题
+export function AlbumDowurlFeedback(id) {
+    return request({
+        url: '/album/info',
+        method: 'post',
+        data: {
+            id: id
+        }
+    })
+}
+
 // Article-----------------------------------------------------------------------------------------------------
 
 // Auth--------------------------------------------------------------------------------------------------------

@@ -116,32 +116,6 @@ export default {
   }
 };
 </script>
-
-{
-  "code": 200, 
-  "data": {
-    "cv": [], 
-    "playsource": [], 
-    "result": {
-      "classification": 1, 
-      "cover": "http://127.0.0.1:8888/static/com/bangumi/cover/20200618015107053.jpg", 
-      "id": 3, 
-      "identification": "lyqxKdsMbangumi1592416281", 
-      "introduce": "\u6d4b\u8bd5", 
-      "name": "\u6d4b\u8bd5", 
-      "openplay_time": "2020-06-02", 
-      "setscount": 10, 
-      "sort": 0, 
-      "sourcecover": "20200618015107053.jpg", 
-      "staff": "\u6d4b\u8bd5", 
-      "station_play": false, 
-      "status": 1, 
-      "upstatus": false
-    }
-  }, 
-  "msg": "ok"
-}
-
 <style lang="scss" scoped>
 .filterm {
   height: inherit;

@@ -48,6 +48,12 @@ const routes = [
         name: 'listalbum',
         component: () => import('@/views/album/index.vue'),
         meta: {title:'资源'}
+      },
+      {
+        path: 'info',
+        name: 'infoalbum',
+        component: () => import('@/views/album/info.vue'),
+        meta: {title:'资源详细信息'}
       }
     ]
   },

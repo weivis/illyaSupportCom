@@ -1,5 +1,20 @@
 <template>
   <div>
+
+    <el-dialog
+      title="绑定番剧"
+      :visible.sync="open_bindBangumiPupon"
+      width="30%"
+      :before-close="handleClose">
+      <el-input placeholder="请输入内容" v-model="bindbangumiid">
+        <template slot="prepend">番剧ID</template>
+      </el-input>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="open_bindBangumiPupon = false">取 消</el-button>
+        <el-button type="primary" @click="send_bindBangumi()">确 定</el-button>
+      </span>
+    </el-dialog>
+
     <el-dialog title="提示" :visible.sync="window_addurl" width="50%">
       <el-input placeholder="请输入内容" v-model="AddDowUrl_SourceName" class="funcbuttonrow">
         <template slot="prepend">下载来源(百度云 XXX)</template>
@@ -109,6 +124,27 @@
       <el-row class="funcbuttonrow">
         <el-button @click="Open_AddDow()">添加下载地址信息</el-button>
       </el-row>
+
+      <el-row class="funcbuttonrow">
+        <el-button @click="open_bindBangumi()">添加绑定的番剧</el-button>
+      </el-row>
+
+      <el-row class="funcbuttonrow">
+        <el-button @click="change({id:id, changeto:5})">取消番剧绑定</el-button>
+      </el-row>
+
+      <el-row class="funcbuttonrow">
+        关联番剧信息:ID - {{nowbangumiid}}
+      </el-row>
+
+      <el-row class="funcbuttonrow">
+        <img :src="nowbangumicover" style="width: 100%" />
+      </el-row>
+
+      <el-row class="funcbuttonrow">
+        {{nowbanguminame}}
+      </el-row>
+
     </div>
   </div>
 </template>
@@ -131,10 +167,38 @@ export default {
       window_addurl: false,
       AddDowUrl_SourceName: "",
       AddDowUrl_name: "",
-      AddDowUrl_dowinfo: ""
+      AddDowUrl_dowinfo: "",
+      open_bindBangumiPupon: false,
+      bindbangumiid: '',
+      nowbangumiid: '',
+      nowbanguminame: '',
+      nowbangumicover: '',
     };
   },
   methods: {
+    open_bindBangumi(){
+      this.open_bindBangumiPupon = true
+    },
+    send_bindBangumi(){
+        this.$http.AlbumBindBangumi({
+            id:this.id,
+            bangumiid: this.bindbangumiid
+        })
+        .then(response => {
+          if (response.code == 200) {
+            this.$message({
+              message: response.msg,
+              type: "success"
+            });
+            this.open_bindBangumiPupon = false
+            this.bindbangumiid = ''
+            this.getUrlList(this.$route.query.id);
+          }
+        })
+        .catch(error => {
+          console.log("error", error);
+        });
+    },
     Del_DowUrl(id){
         this.$http.AlbumDowurlDel({
             id:id
@@ -182,6 +246,7 @@ export default {
     },
     save() {
       let data = {
+        id:this.id,
         name: this.name,
         introduce: this.introduce,
         classification: this.classification,
@@ -196,6 +261,7 @@ export default {
               type: "success"
             });
           }
+          this.query(this.$route.query.id);
         })
         .catch(error => {
           console.log("error", error);
@@ -231,6 +297,10 @@ export default {
             this.name = result.name;
             this.show_index = result.show_index;
             this.status = result.status;
+            let nowbangum = response.data.relation_bangumi;
+            this.nowbangumiid = nowbangum.id
+            this.nowbanguminame = nowbangum.name
+            this.nowbangumicover = nowbangum.cover
           }
         })
         .catch(error => {
@@ -254,6 +324,10 @@ export default {
         .AlbumChange(data)
         .then(response => {
           if (response.code == 200) {
+            this.$Message({
+              message: response.msg,
+              duration: 5 * 1000
+            })
             this.query(this.$route.query.id);
           }
         })

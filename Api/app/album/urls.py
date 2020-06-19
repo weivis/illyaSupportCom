@@ -95,12 +95,29 @@ def album_change(request):
             1 上下架
             2 是否首页展示
             3 是否删除
+            4 物理删除
+            5 取消绑定
     Result
         code:   状态码
         msg:    消息
         data:
     '''
     c,m,d = views.album_change(request.json)
+    return ReturnRequest(c,m,d)
+
+@album.route('/bind/bangumi', methods=["POST"])
+@requestPOST
+def album_bind_bangumi(request):
+    '''绑定番剧
+    Args
+        id          int     资源id
+        bangumiid   int     番剧id
+    Result
+        code:   状态码
+        msg:    消息
+        data:
+    '''
+    c,m,d = views.album_bind_bangumi(request.json)
     return ReturnRequest(c,m,d)
 
 @album.route('/dowurl/list', methods=["POST"])
