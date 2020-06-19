@@ -39,6 +39,18 @@ const routes = [
       },
     ]
   },
+  {
+    path: '/album',
+    component: Layout,
+    children: [
+      {
+        path: '/',
+        name: 'listalbum',
+        component: () => import('@/views/album/index.vue'),
+        meta: {title:'资源'}
+      }
+    ]
+  },
 ]
 
 const router = new VueRouter({

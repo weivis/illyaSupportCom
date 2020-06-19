@@ -4,6 +4,30 @@ import request from '@/utils/request'
 
 // Album-------------------------------------------------------------------------------------------------------
 
+//资源列表
+export function AlbumList(types, pages, sfilter) {
+    return request({
+        url: '/album/list',
+        method: 'post',
+        data: {
+            types: types,
+            pages: pages,
+            sfilter: sfilter
+        }
+    })
+}
+
+//资源详细信息
+export function AlbumInfo(id) {
+    return request({
+        url: '/album/info',
+        method: 'post',
+        data: {
+            id: id
+        }
+    })
+}
+
 // Article-----------------------------------------------------------------------------------------------------
 
 // Auth--------------------------------------------------------------------------------------------------------

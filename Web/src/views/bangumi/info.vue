@@ -6,14 +6,14 @@
           <img :src="cover" style="width:100%" />
         </div>
         <div class="right">
-            <div class="title">{{name}}</div>
-            <div class="info">
-              <span class="mr">{{openplay_time}}开播</span>
-              <span class="mr">全{{setscount}}话</span>
-              <span class="mr" v-if="upstatus === true">连载中</span>
-              <span class="mr" v-if="upstatus === false">已完结</span>
-            </div>
-            <div class="introduce">{{introduce}}</div>
+          <div class="title">{{name}}</div>
+          <div class="info">
+            <span class="mr">{{openplay_time}}开播</span>
+            <span class="mr">全{{setscount}}话</span>
+            <span class="mr" v-if="upstatus === true">连载中</span>
+            <span class="mr" v-if="upstatus === false">已完结</span>
+          </div>
+          <div class="introduce">{{introduce}}</div>
         </div>
       </div>
       <div class="filterm">
@@ -21,20 +21,38 @@
       </div>
     </div>
     <div class="bottom Common page-width">
-        <div class="left-content">
-            <div class="page">
-                <div class="p-name">播放源</div>
-            </div>
-            <div class="page">
-                <div class="p-name">CV</div>
-            </div>
+      <div class="left-content">
+        <div class="page">
+          <div class="p-name">播放源</div>
+          <div class="p-content">
+              <el-link v-for="(item, index) in playsource_list" :key="index" :href="item.url" target="_blank" :underline="false">
+                <div class="PlaySource-button">{{item.source_name}}</div>
+              </el-link>
+          </div>
         </div>
-        <div class="right-content">
-            <div class="page">
-                <div class="p-name">STAFF</div>
-                <div class="staff">{{staff}}</div>
+        <div class="line"></div>
+        <div class="page">
+          <div class="p-name">CV</div>
+          <div class="p-content">
+            <div v-for="(item, index) in cv_list" :key="index" class="cv">
+              <div class="head">
+                <img :src="item.head" style="width:100%" />
+              </div>
+              <div class="info">
+                <div class="name">{{item.people_name}}</div>
+                <div class="role">{{item.role_name}}</div>
+              </div>
             </div>
+          </div>
         </div>
+        <div class="line"></div>
+      </div>
+      <div class="right-content">
+        <div class="page">
+          <div class="p-name">STAFF</div>
+          <div class="staff">{{staff}}</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -126,7 +144,7 @@ export default {
 
 <style lang="scss" scoped>
 .filterm {
-  height: 399px;
+  height: inherit;
   width: 100%;
   position: absolute;
   overflow: hidden;
@@ -157,7 +175,7 @@ export default {
   overflow: hidden;
   display: flex;
   .content {
-      margin-top: 33px;;
+    margin-top: 33px;
     z-index: 20;
     position: relative;
   }
@@ -170,48 +188,182 @@ export default {
     width: calc(100% - 290px);
     float: right;
     color: #ffffff;
-    .title{
-        font-size: 24px;
-        font-weight: bold;
-        width: 100%;
-        margin-top: 60px;
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      width: 100%;
+      margin-top: 60px;
     }
-    .info{
-        height: 14px;
-        font-size: 14px;
-        width: 100%;
-        margin-top: 15px;
-        .mr {
-            margin-right: 5px;
-            float: left;
-        }
+    .info {
+      height: 14px;
+      font-size: 14px;
+      width: 100%;
+      margin-top: 15px;
+      .mr {
+        margin-right: 5px;
+        float: left;
+      }
     }
-    .introduce{
-        font-size: 12px;
-        width: 100%;
-        margin-top: 60px;
+    .introduce {
+      font-size: 12px;
+      width: 100%;
+      margin-top: 60px;
     }
   }
 }
-.bottom{
-    margin-top: 40px;
-    display: flex;
-    .left-content{width: calc(100% - 280px);float: left;}
-    .right-content{width: 250px;float: right;}
+.line {
+  width: 100%;
+  height: 2px;
+  background-color: #f4f4f4;
+  margin-top: 35px;
+  margin-bottom: 35px;
 }
-.page{
-    margin-bottom: 30px;
-    .p-name{
-        font-weight: bold;
-        color: #000;
-        font-size: 18px;
-        width: 100%;
-        margin-bottom: 22px;
+.bottom {
+  margin-top: 40px;
+  display: flow-root;
+  .left-content {
+    width: calc(100% - 320px);
+    float: left;
+  }
+  .right-content {
+    width: 250px;
+    float: right;
+  }
+}
+.page {
+  margin-bottom: 30px;
+  .p-name {
+    font-weight: bold;
+    color: #000;
+    font-size: 18px;
+    width: 100%;
+    margin-bottom: 22px;
+  }
+  .p-content {
+    width: 100%;
+    display: flow-root;
+  }
+}
+.staff {
+  font-size: 12px;
+  white-space: pre-wrap;
+  line-height: 20px;
+}
+.PlaySource-button {
+  padding-left: 45px;
+  padding-right: 45px;
+  height: 48px;
+  line-height: 50px;
+  margin-right: 25px;
+  border: 2px solid #eeeeee;
+  float: left;
+}
+.cv {
+  float: left;
+  display: flex;
+  margin-right: 50px;
+  .head {
+    height: 44.5px;
+    width: 44.5px;
+    border-radius: 50px;
+    overflow: hidden;
+    float: left;
+    margin-right: 5px;
+  }
+  .info {
+    float: left;
+    height: 44.5px;
+    .name {
+      margin: 2px;
+      font-size: 14px;
     }
-}
-.staff{
-    font-size: 12px;
-    white-space:pre-wrap;
+    .role {
+      margin-top: 4px;
+      font-size: 12px;
+    }
+  }
 }
 
+@media screen and (max-width: 600px) {
+  .filterm {
+    height: 1200px;
+  }
+  .top {
+    min-height: 850px;
+    height: inherit;
+    .content {
+      margin-top: 0px;
+    }
+    .left {
+      width: 100%;
+      height: inherit;
+    }
+    .right {
+      width: 100%;
+      .title {
+        width: 100%;
+        margin-top: 10px;
+      }
+      .info {
+        height: 14px;
+        width: 100%;
+        margin-top: 10px;
+        .mr {
+          margin-right: 5px;
+        }
+      }
+      .introduce {
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+  }
+  .bottom {
+    margin-top: 40px;
+    display: flow-root;
+    .left-content {
+      width: 100%;
+      float: left;
+    }
+    .right-content {
+      width: 100%;
+      float: right;
+    }
+  }
+.PlaySource-button {
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 30px;
+  line-height: 30px;
+  margin-right: 25px;
+  border: 2px solid #eeeeee;
+  float: left;
+}
+.cv {
+  display: flex;
+  margin-right: 0px;
+  width: 100%;
+  margin-bottom: 15px;
+  .head {
+    height: 44.5px;
+    width: 44.5px;
+    border-radius: 50px;
+    overflow: hidden;
+    float: left;
+    margin-right: 5px;
+  }
+  .info {
+    float: left;
+    height: 44.5px;
+    .name {
+      margin: 2px;
+      font-size: 14px;
+    }
+    .role {
+      margin-top: 4px;
+      font-size: 12px;
+    }
+  }
+}
+}
 </style>

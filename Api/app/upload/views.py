@@ -85,7 +85,7 @@ def upload_file(request):
 
     newfilename = CreateNewFilename(ext)
 
-    if upload_key in ['cvhead']:
+    if upload_key in ['cvhead', 'albumcover']:
         files = FileCompress_Head(file)
     else:
         files = file
