@@ -3,6 +3,7 @@ from app.Common import Generate_identification
 from app.Tool import _Paginate
 from app.Extensions import db
 from app.Config import SERVER_GULAOBURL
+from app.Models.db_Account import AccountUser
 
 def video_list(request):
     print(request)
@@ -42,6 +43,8 @@ def video_list(request):
     count, items, page, pages = _Paginate(data, pages)
 
     result = [{
+        'author_head': SERVER_GULAOBURL + '/static/com/userhead/' + AccountUser.query.filter_by(id=int(i.upload_userid)).first().head if AccountUser.query.filter_by(id=int(i.upload_userid)).first().head else SERVER_GULAOBURL + '/static/com/userhead/' + 'default.png',
+        'author_username': AccountUser.query.filter_by(id=i.upload_userid).first().username,
         'id':i.id,
         'upload_userid':i.upload_userid,
         'verify_type':i.verify_type,
@@ -80,6 +83,8 @@ def video_query(request):
     i = obj
 
     return 200, "", {
+        'author_head': SERVER_GULAOBURL + '/static/com/userhead/' + AccountUser.query.filter_by(id=i.upload_userid).first().head if AccountUser.query.filter_by(id=i.upload_userid).first().head else SERVER_GULAOBURL + '/static/com/userhead/' + 'default.png',
+        'author_username': AccountUser.query.filter_by(id=i.upload_userid).first().username,
         'id':i.id,
         'upload_userid':i.upload_userid,
         'verify_type':i.verify_type,

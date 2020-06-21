@@ -9,21 +9,18 @@
     />
     <div class="Common page-width content">
       <div v-for="(item, index) in list" :key="index" class="item">
-        <el-link :href="'/album/info?id=' + item.id" target="_blank" :underline="false">
-          <div class="content">
-            <div class="tag">
-              <div class="classification">
-                <span v-if="item.classification === 1">番剧</span>
-                <span v-if="item.classification === 2">OST</span>
-                <span v-if="item.classification === 3">MMD</span>
-                <span v-if="item.classification === 4">Live2D</span>
-              </div>
-            </div>
-            <div class="title">{{item.name}}</div>
-          </div>
+        <el-link :href="'/doujin/info?id=' + item.id" target="_blank" :underline="false">
           <div class="cover">
-            <img class="boxshow" src="../../assets/boxshow.png" />
             <el-image style="width:100%;height:100%;display:block;" :src="item.cover" fit="cover"></el-image>
+          </div>
+          <div class="content">
+            <div class="l">
+              <div class="userhead"><el-image style="width:100%;height:100%;display:block;" :src="item.author_head" fit="cover"></el-image></div>
+            </div>
+            <div class="r">
+              <div class="title">{{item.title}}</div>
+              <div class="username">{{item.author_username}}</div>
+            </div>
           </div>
         </el-link>
       </div>
@@ -101,36 +98,19 @@ export default {
   float: left;
   margin-right: 3%;
   width: 13.9%;
-  border: 2px solid #d2d2d2;
   position: relative;
-  .tag {
-    width: 100%;
-    height: 22px;
-    margin-bottom: 10px;
-    .classification {
-      background-color: #0ec900;
-      border-radius: 50px;
-      float: left;
-      line-height: 22px;
-      padding-left: 18px;
-      padding-right: 18px;
-      height: 22px;
-      font-size: 12px;
-      font-weight: bold;
-      color: #ffffff;
-    }
-  }
   .content {
-    z-index: 20;
-    position: absolute;
-    bottom: 0;
-    width: calc(100% - 30px);
+    margin-top: 15px;
     height: 80px;
-    padding: 15px;
+    .l{width: 30px;height: 30px;float: left;}
+    .r{float: right;width: calc(100% - 45px);}
+  }
+  .userhead{
+    border-radius: 50px;overflow: hidden;height: 30px;width: 30px;
   }
   .title {
-    font-size: 12px;
-    color: #ffffff;
+    font-size: 14px;
+    color: #000000;
     text-overflow: -o-ellipsis-lastline;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -138,6 +118,10 @@ export default {
     -webkit-line-clamp: 3;
     line-height: 18px;
     overflow: hidden;
+    height: 35px;;
+  }
+  .username{
+    font-size: 10px;color: #8a8a8a;margin-top: 10px;
   }
   .cover {
     position: relative;
