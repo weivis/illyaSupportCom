@@ -1,5 +1,16 @@
 import request from '@/utils/request'
 
+export function upload(data) {
+    return request({
+        url: '/upload/',
+        method: 'post',
+        data: data,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+}
+
 // Admin-------------------------------------------------------------------------------------------------------
 
 // Album-------------------------------------------------------------------------------------------------------
@@ -168,7 +179,7 @@ export function getUserinfo(id) {
     return request({
         url: '/user/get/userinfo',
         method: 'post',
-        data: {id:id}
+        data: { id: id }
     })
 }
 
@@ -177,9 +188,9 @@ export function userEditinfo(head, username, introduce) {
         url: '/user/edit-myinfo',
         method: 'post',
         data: {
-            head:head,
-            username:username,
-            introduce:introduce
+            head: head,
+            username: username,
+            introduce: introduce
         }
     })
 }
@@ -193,3 +204,39 @@ export function userInfo() {
 }
 
 // Video-------------------------------------------------------------------------------------------------------
+
+//资源列表
+export function VideoList(data) {
+    return request({
+        url: '/video/list',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+//获取视频信息
+export function VideoQuery(data) {
+    return request({
+        url: '/video/query',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+//视频投稿和编辑
+export function VideoUploadOrEdit(data) {
+    return request({
+        url: '/video/uploadoredit',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+//用户删除视频
+export function VideoDel(data) {
+    return request({
+        url: '/video/user/del',
+        method: 'post',
+        data: data || {}
+    })
+}

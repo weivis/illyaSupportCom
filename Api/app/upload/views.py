@@ -12,7 +12,8 @@ UPLOAD_KEY_FLOAD = {
     'albumcover':'/com/album/cover',
     'cvhead':'/com/cvhead',
     'articleimg':'/com/article/img',
-    'articlecover':'/com/article/cover'
+    'articlecover':'/com/article/cover',
+    'videocover':'/com/video/cover'
     }
 
 def FileCompress_Head(files):
@@ -114,7 +115,7 @@ def upload_file(request):
     if upload_key in ['cvhead', 'albumcover']:
         files = FileCompress_Head(file)
 
-    elif upload_key in ['articlecover']:
+    elif upload_key in ['articlecover', 'videocover']:
         files = FileCompress_Cover(file)
 
     else:

@@ -14,12 +14,17 @@
 <template>
   <div class="Components-CommonContentNav">
       <div class="CommonContentNav AllWidth" :style=componentsstyle>
+
           <div class="CommonContentNav ContentWidth Common page-width" v-if="button_style === '0'">
             <el-button v-for="(item,index) in buttlist" :style=buttonstyle :key="index + item" v-bind:class="{'button-active':index === i}"  class="CommonContentNav button" @click="conttypeChange(item.conttype, index)" round>{{item.title}}</el-button>
+            <el-button v-for="(item,index) in rnav" :style=buttonstyle :key="index + item + 1" class="rnavbutton" @click="opennav(item.routername)">{{item.title}}</el-button>
           </div>
+
           <div class="CommonContentNav ContentWidth Common page-width" v-if="button_style === '1'">
             <el-button v-for="(item,index) in buttlist" :style=buttonstyle :key="index + item" v-bind:class="{'button-active':index === i}"  class="CommonContentNav button" @click="conttypeChange(item.conttype, index)">{{item.title}}</el-button>
+            <el-button v-for="(item,index) in rnav" :style=buttonstyle :key="index + item + 2" class="rnavbutton" @click="opennav(item.routername)">{{item.title}}</el-button>
           </div>
+          
       </div>
   </div>
 </template>
@@ -54,12 +59,21 @@ export default {
         return [{ title:'按钮', conttype:0 }]
       }
     },
+    rnav:{
+      type: Array,
+      default (){
+        return [] //{ title:'按钮', routername:'' }
+      }
+    },
     conttype:{
       type: Number,
       default:0
     },
   },
   methods: {
+    opennav(url){
+      this.$router.push({ name: url});
+    },
     conttypeChange(conttype, index) {
       this.i = index
       this.$emit("update:conttype", conttype)
@@ -78,6 +92,7 @@ export default {
     .CommonContentNav.AllWidth{width: 100%;}
     .CommonContentNav.ContentWidth{padding-top: 28px;padding-bottom: 28px;margin: 0 auto !important;}
     .CommonContentNav.button{margin-left: 0;margin-right: 25px;font-weight: bold;}
+    .rnavbutton{float: right;border-radius: 30px;}
 @media screen and (max-width: 1600px) {
 }
 

@@ -1,7 +1,11 @@
 from app.Models.db_Video import VideoData
 from app.Common import Generate_identification
+from app.Tool import _Paginate
+from app.Extensions import db
+from app.Config import SERVER_GULAOBURL
 
 def video_list(request):
+    print(request)
     types = request.get('types', 0)
     pages = request.get('pages', 1)
     ctypes = request.get('ctypes', 0)
@@ -14,10 +18,10 @@ def video_list(request):
         data = data.filter_by(upload_userid=int(userid))
 
     if sfilter == 0:
-        data = data.filter_by(verify_type=1)
+        data = data.filter_by()
 
     if sfilter == 1:
-        data = data
+        data = data.filter_by(verify_type=1)
 
     if sfilter == 2:
         data = data.filter_by(verify_type=2)
@@ -28,21 +32,12 @@ def video_list(request):
     if sfilter == 4:
         data = data.filter_by(verify_type=4)
 
+    if types == 1:
+        if ctypes != 0:
+            data = data.filter_by(content_classification=types)
+
     if types != 0:
         data = data.filter_by(classification=types)
-
-    if classification == 1:
-        if ctypes == 0:
-            data = data
-
-        if ctypes == 1:
-            data = data.filter_by(content_classification=1)
-
-        if ctypes == 2:
-            data = data.filter_by(content_classification=2)
-
-        if ctypes == 3:
-            data = data.filter_by(content_classification=3)
 
     count, items, page, pages = _Paginate(data, pages)
 
@@ -55,7 +50,7 @@ def video_list(request):
         'content_classification':i.content_classification,
         'identification':i.identification,
         'title':i.title,
-        'cover':i.cover,
+        'cover':SERVER_GULAOBURL + "/static/com/video/cover/" + i.cover,
         'introduce':i.introduce,
         'source_type':i.source_type,
         'original_type':i.original_type,
@@ -69,6 +64,40 @@ def video_list(request):
 
     return 200, 'ok', {
         'result':result, 'count':count, 'page':page, 'pages':pages
+    }
+
+def video_query(request):
+    id = request.get('id', None)
+
+    if not id:
+        return 404, 'ID不能为空', {}
+
+    obj = VideoData.query.filter_by(id=id).first()
+
+    if not obj:
+        return 400, '视频不存在', []
+ 
+    i = obj
+
+    return 200, "", {
+        'id':i.id,
+        'upload_userid':i.upload_userid,
+        'verify_type':i.verify_type,
+        'verify_falseinfo':i.verify_falseinfo,
+        'classification':i.classification,
+        'content_classification':i.content_classification if i.content_classification else 0,
+        'identification':i.identification,
+        'title':i.title,
+        'cover':SERVER_GULAOBURL + "/static/com/video/cover/" + i.cover,
+        'filecover': i.cover,
+        'introduce':i.introduce,
+        'source_type':i.source_type,
+        'original_type':i.original_type,
+        'original_url':i.original_url,
+        'original_author':i.original_author,
+        'videoloadurl':i.videoloadurl,
+        'show_index':i.show_index,
+        'create_time':i.create_time.strftime("%Y-%m-%d %H:%M:%S")
     }
 
 def video_upload_or_edit(request):
@@ -124,13 +153,13 @@ def video_upload_or_edit(request):
     else:
         add = VideoData()
 
-    if classification == 1:
-        add.classification = int(classification)
-
     if original_type == 2:
         add.original_type = original_type
         add.original_url = original_url
 
+    add.content_classification = int(content_classification)
+    add.classification = int(classification)
+    add.original_type = original_type
     add.upload_userid = current_account.id
     add.verify_type = 2
     add.title = title

@@ -45,6 +45,48 @@ const routes = [
     ]
   },
   {
+    path: '/user',
+    component: Layout,
+    children: [
+      {
+        path: 'contribute',
+        name: 'usercontribute',
+        component: () => import('@/views/user/contribute.vue'),
+        meta: {title:'我的投稿'}
+      },
+      {
+        path: 'more-contribute',
+        name: 'morecontribute',
+        component: () => import('@/views/user/more-contribute.vue'),
+        meta: {title:'我的投稿'}
+      },
+      {
+        path: 'photos',
+        name: 'userphotos',
+        component: () => import('@/views/user/photos.vue'),
+        meta: {title:'我的相簿'}
+      }
+    ]
+  },
+  {
+    path: '/doujin',
+    component: Layout,
+    children: [
+      {
+        path: '/',
+        name: 'listdoujin',
+        component: () => import('@/views/doujin/index.vue'),
+        meta: {title:'同人作品'}
+      },
+      {
+        path: 'info',
+        name: 'infodoujin',
+        component: () => import('@/views/doujin/info.vue'),
+        meta: {title:'详细信息'}
+      },
+    ]
+  },
+  {
     path: '/bangumi',
     component: Layout,
     children: [

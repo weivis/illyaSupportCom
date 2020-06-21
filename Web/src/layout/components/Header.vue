@@ -57,17 +57,12 @@ export default {
         {
           jptitle: "どうじん",
           cntitle: "同人二次创作",
-          link: "/bangumi"
+          link: "/doujin"
         },
         {
           jptitle: "公式情報",
           cntitle: "资讯",
           link: "/news"
-        },
-        {
-          jptitle: "どうじん",
-          cntitle: "同人二次创作",
-          link: "/bangumi"
         },
         {
           jptitle: "アニメ",
@@ -337,5 +332,8 @@ export default {
       }
     }
   }
+}
+@media screen and (max-width: 700px) {
+  .opennavbutton{float: right;height: 60px;width: 40px;line-height: 60px;font-size: 32px;text-align: right;}
 }
 </style>

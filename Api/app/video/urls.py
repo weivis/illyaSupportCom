@@ -20,8 +20,8 @@ def video_list(request):
                 3   混合向
         pages       int     分页        默认为1
         sfilter     int     类型        默认为0
-            0   正常 只有审核通过的视频
-            1   全部
+            1   正常 只有审核通过的视频
+            0   全部
             2   等待审核
             3   审核不合格退回
             4   被管理员删除
@@ -55,6 +55,21 @@ def video_list(request):
             pages   总页数
     '''
     c,m,d = views.video_list(request.json)
+    return ReturnRequest(c,m,d)
+
+@video.route('/query', methods=["POST"])
+@requestPOST
+def video_query(request):
+    '''获取视频信息
+    Args
+        id              int             视频id
+
+    Result
+        code:   状态码
+        msg:    消息
+        data:
+    '''
+    c,m,d = views.video_query(request.json)
     return ReturnRequest(c,m,d)
 
 @video.route('/uploadoredit', methods=["POST"])
@@ -96,7 +111,7 @@ def video_upload_or_edit(request):
     return ReturnRequest(c,m,d)
 
 @video.route('/user/del', methods=["POST"])
-@requestPOST
+@TokenPost([2])
 def video_del(request):
     '''用户删除视频
     Args

@@ -9,6 +9,8 @@
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item @click.native="open_photos()">我的相簿</el-dropdown-item>
+          <el-dropdown-item @click.native="open_contribute()">我的投稿</el-dropdown-item>
           <el-dropdown-item @click.native="Logout_users">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -35,6 +37,12 @@ export default {
       this.user = user
   },
   methods: {
+    open_photos(){
+      this.$router.push({ name: "userphotos"})
+    },
+    open_contribute(){
+      this.$router.push({ name: "usercontribute"})
+    },
     Logout_users() {
       this.$http
         .authLogout(this.user.userToken)
@@ -61,7 +69,7 @@ export default {
 }
 .userbar{
   line-height: 60px;
-  .head{float: left;width: 40px;height: 40px;border-radius: 50px;overflow: hidden;margin-top: 10px;}
+  .head{float: left;width: 35px;height: 35px;border-radius: 50px;overflow: hidden;margin-top: 15px;}
   .username{float: left;margin-left: 15px;}
   }
 </style>
