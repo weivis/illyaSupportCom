@@ -120,7 +120,6 @@ export default {
         .ArticleList({
           types: this.types,
           sfilter: this.sfilter,
-          keyword: this.keyword,
           pages: this.currentPage
         })
         .then(response => {

@@ -119,8 +119,8 @@ def auth_register(request):
         if gtype:
 
             try:
-                html = '<h3>点击以下链接完成账户注册验证</h3><a>{0}</a>'.format(
-                    str(vcode))
+                html = '<h3>点击以下链接完成账户注册验证</h3><a href="http://localhost:8080/auth/verify?vcode={0}">点击完成注册验证</a> 或 复制地址到浏览器打开http://localhost:8080/auth/verify?vcode={1}'.format(
+                    str(vcode), str(vcode))
                 SeedEmail(
                     email_title='[ 魔法少女伊莉雅应援站(illya-support.weivird.com) ]注册账户邮箱验证',
                     email_body='请点击链接完成账户注册验证',
@@ -152,14 +152,14 @@ def auth_register_again_sendemail(request):
         return 400, '该邮箱未注册', {}
 
     if querys.status != 0:
-        return 400, '该邮箱以验证完成 无法重复发送注册验证码', {}
+        return 401, '该邮箱以验证完成 无法重复发送注册验证码', {}
 
     gtype, vcode = CreateVcode('', {'id': querys.id})
     if gtype:
 
         try:
-            html = '<h3>点击以下链接完成账户注册验证</h3><a>{0}</a>'.format(
-                str(vcode))
+            html = '<h3>点击以下链接完成账户注册验证</h3><a href="http://localhost:8080/auth/verify?vcode={0}">点击完成注册验证</a> 或 复制地址到浏览器打开http://localhost:8080/auth/verify?vcode={1}'.format(
+                    str(vcode), str(vcode))
             SeedEmail(
                 email_title='[ 魔法少女伊莉雅应援站(illya-support.weivird.com) ]注册账户邮箱验证',
                 email_body='请点击链接完成账户注册验证',

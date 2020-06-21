@@ -6,6 +6,18 @@ export function getUserToken() {
   return window.localStorage.getItem(TokenKey);
 }
 
+export function getUser() { 
+  if (window.localStorage.getItem(TokenKey)){
+    return{
+      userToken: window.localStorage.getItem(TokenKey),
+      userID: window.localStorage.getItem(UserID),
+      userName: window.localStorage.getItem(UserName)
+    }
+  }else{
+    return null
+  }
+}
+
 export function setUser(token, userid, username) { 
   window.localStorage.setItem(TokenKey, token)
   window.localStorage.setItem(UserName, username)

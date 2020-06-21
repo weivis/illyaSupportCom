@@ -50,6 +50,25 @@ export function AlbumDowurlFeedback(id) {
 
 // Article-----------------------------------------------------------------------------------------------------
 
+//文章列表
+export function ArticleList(data) {
+    return request({
+        url: '/article/list',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+//文章列表
+export function ArticleInfo(data) {
+    return request({
+        url: '/article/info',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+
 // Auth--------------------------------------------------------------------------------------------------------
 
 // 登录

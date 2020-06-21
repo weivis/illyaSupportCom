@@ -14,7 +14,7 @@ const service = axios.create({
 // request拦截器
 service.interceptors.request.use(
   config => {
-    var Authorization = window.localStorage.getItem('illyaComAdminToken') ? window.localStorage.getItem('illyaComAdminToken') : '';
+    var Authorization = window.localStorage.getItem('illyaComUserToken') ? window.localStorage.getItem('illyaComUserToken') : '';
     console.log('Authorization',Authorization)
     if (Authorization) {
       config.headers['Token'] = Authorization // 让每个请求携带自定义token 请根据实际情况自行修改
@@ -31,21 +31,28 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const res = response.data
-    if (res && res.code !== 200) {
-      if (res && res.code == 10086) {
-        Message({
-          message: res.msg,
-          type: 'error',
-          duration: 5 * 1000
-        })
-        router.push({ name: "login", params: { msg: res.msg } })
-      } else {
-        Message({
-          message: res.msg,
-          type: 'error',
-          duration: 5 * 1000
-        })
-      }
+
+    if (res && res.code == 200){
+      Message({
+        message: res.msg,
+        type: 'success',
+        duration: 5 * 1000
+      })
+    }
+    if (res && res.code !== 200){
+      Message({
+        message: res.msg,
+        type: 'error',
+        duration: 5 * 1000
+      })
+    }
+    if (res && res.code == 10086){
+      Message({
+        message: res.msg,
+        type: 'error',
+        duration: 5 * 1000
+      })
+      router.push({ name: "login", params: { msg: res.msg } })
     }
     return res
   },

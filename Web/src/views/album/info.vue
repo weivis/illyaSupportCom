@@ -23,12 +23,14 @@
             <div class="p-name">下载列表</div>
             <div class="p-content">
               <div v-for="(item, index) in dowlist" :key="index" class="dowitem">
-                <div class="title">
-                  <div class="source">{{item.dowsource_name}}</div>
-                  <div class="name">{{item.name}}</div>
+                <div class="content">
+                  <div class="title">
+                    <div class="source">{{item.dowsource_name}}</div>
+                    <div class="name">{{item.name}}</div>
+                  </div>
+                  <div class="info">{{item.dowinfo}}</div>
+                  <div class="feedback" @click="feedback(item.id)">失效反馈</div>
                 </div>
-                <div class="info">{{item.dowinfo}}</div>
-                <div class="feedback" @click="feedback(item.id)">失效反馈</div>
               </div>
             </div>
           </div>
@@ -241,6 +243,11 @@ export default {
   border: 2px solid #f4f4f4;
   margin-bottom: 20px;
   display: flow-root;
+  .content {
+    word-wrap: break-word;
+    word-break: normal;
+    width: calc(100% - 130px);
+  }
   .title {
     line-height: 18px;
     width: 100%;
@@ -276,6 +283,56 @@ export default {
   }
   .feedback:hover {
     border: 1px solid #0072ff96;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .dowitem {
+    .content {
+      width: calc(100% - 130px);
+    }
+    .feedback {
+      right: 20px;
+      top: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+.top {
+  display: flow-root;
+  width: 100%;
+  .left {
+    height: inherit;
+    float: left;
+    width: 100%;
+  }
+  .rgiht {
+    margin-top: 20px;
+    float: right;
+    width: 100%;
+  }
+}
+.bottom {
+  margin-top: 40px;
+  display: flow-root;
+  .left-content {
+    width: 100%;
+    float: left;
+  }
+  .right-content {
+    width: 100%;
+    float: right;
+  }
+}
+  .dowitem {
+    .content {
+      width: calc(100% - 130px);
+    }
+    .feedback {
+      right: 20px;
+      top: 20px;
+    }
   }
 }
 </style>

@@ -22,6 +22,30 @@ const routes = [
     ]
   },
   {
+    path: '/auth',
+    component: Layout,
+    children: [
+      {
+        path: '/sgin-in',
+        name: 'login',
+        component: () => import('@/views/auth/login.vue'),
+        meta: {title:'登录'}
+      },
+      {
+        path: 'register',
+        name: 'register',
+        component: () => import('@/views/auth/register.vue'),
+        meta: {title:'注册'}
+      },
+      {
+        path: 'verify',
+        name: 'verify',
+        component: () => import('@/views/auth/verify.vue'),
+        meta: {title:'邮箱验证'}
+      },
+    ]
+  },
+  {
     path: '/bangumi',
     component: Layout,
     children: [
@@ -53,6 +77,24 @@ const routes = [
         path: 'info',
         name: 'infoalbum',
         component: () => import('@/views/album/info.vue'),
+        meta: {title:'资源详细信息'}
+      }
+    ]
+  },
+  {
+    path: '/news',
+    component: Layout,
+    children: [
+      {
+        path: '/',
+        name: 'listnews',
+        component: () => import('@/views/news/index.vue'),
+        meta: {title:'资源'}
+      },
+      {
+        path: 'item',
+        name: 'itemnews',
+        component: () => import('@/views/news/item.vue'),
         meta: {title:'资源详细信息'}
       }
     ]

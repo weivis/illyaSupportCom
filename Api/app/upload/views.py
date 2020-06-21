@@ -39,6 +39,32 @@ def FileCompress_Head(files):
     print(file.size)
     return file
 
+def FileCompress_Cover(files):
+    '''图片压缩'''
+    from PIL import Image
+    file=Image.open(files)
+
+    topw = [0,0]
+
+    xl, yl = file.size
+    print(xl, yl)
+
+    if xl > yl:
+        topw = [yl, 1]
+        print(topw)
+    else:
+        topw = [xl, 0]
+        print(topw)
+
+    px = topw[0]
+
+    cover_hi = px / 1.6
+    file = file.crop((0, 0, px, cover_hi))
+
+    print(file.size)
+    return file
+
+
 def CreateNewFilename(ext):
     '''生成新的文件名'''
     return datetime.strftime(datetime.now(),'%Y%m%d%H%M%S') + '{:03d}'.format(random.randint(0, 999)) + ext
@@ -87,6 +113,10 @@ def upload_file(request):
 
     if upload_key in ['cvhead', 'albumcover']:
         files = FileCompress_Head(file)
+
+    elif upload_key in ['articlecover']:
+        files = FileCompress_Cover(file)
+
     else:
         files = file
 

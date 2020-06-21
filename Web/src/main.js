@@ -12,7 +12,8 @@ import * as auth from './utils/auth'
 import '@/permission' // permission control
 import '@/styles/common.scss' // global css
 import '@/styles/el-important.scss' // global css
-import 'element-ui/lib/theme-chalk/index.css';
+import 'element-ui/lib/theme-chalk/index.css'
+// import '@/styles/transition.scss'
 
 Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false
