@@ -58,7 +58,12 @@ export default {
         });
     }
   },
-  created() {}
+  created() {
+    let user = this.$authUser.getUser()
+    if(user){
+      this.$router.push({ name: "home"});
+    }
+  }
 };
 </script>
 

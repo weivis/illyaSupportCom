@@ -1,5 +1,6 @@
 const TokenKey = 'illyaComUserToken'
 const UserName = 'illyaComUserName'
+const UserHead = 'illyaComUserHead'
 const UserID = 'illyaComUserID'
 
 export function getUserToken() {
@@ -11,22 +12,27 @@ export function getUser() {
     return{
       userToken: window.localStorage.getItem(TokenKey),
       userID: window.localStorage.getItem(UserID),
-      userName: window.localStorage.getItem(UserName)
+      userName: window.localStorage.getItem(UserName),
+      userHead: window.localStorage.getItem(UserHead)
     }
   }else{
     return null
   }
 }
 
-export function setUser(token, userid, username) { 
+export function setUser(token, userid, username, head) { 
+  console.log('登录成功')
   window.localStorage.setItem(TokenKey, token)
   window.localStorage.setItem(UserName, username)
   window.localStorage.setItem(UserID, userid)
+  window.localStorage.setItem(UserHead, head)
 }
 
 export function removeUser() {
-  localStorage.removeItem(TokenKey);
-  localStorage.removeItem(UserName);
-  localStorage.removeItem(UserID);
+  console.log('退出登录')
+  window.localStorage.removeItem(TokenKey);
+  window.localStorage.removeItem(UserName);
+  window.localStorage.removeItem(UserID);
+  window.localStorage.removeItem(UserHead);
   window.localStorage.clear();
 }

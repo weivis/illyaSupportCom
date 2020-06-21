@@ -28,10 +28,10 @@ def auth_sign_in_admin(request):
             user.token = str(md5)
             db.session.commit()
             if not user.head or user.head == '':
-                head = Config.SERVER_STATICLOADURL + '/user/head/' + 'default.png'
+                head = Config.SERVER_STATICLOADURL + '/com/userhead/' + 'default.png'
             else:
                 head = Config.SERVER_STATICLOADURL + \
-                    '/user/head/' + str(user.head)
+                    '/com/userhead/' + str(user.head)
             return 200, '登录成功', dict(token=md5, username=user.username, head=head)
 
         except Exception as e:
@@ -66,11 +66,11 @@ def auth_sign_in(request):
             user.token = str(md5)
             db.session.commit()
             if not user.head or user.head == '':
-                head = Config.SERVER_STATICLOADURL + '/user/head/' + 'default.png'
+                head = Config.SERVER_STATICLOADURL + '/com/userhead/' + 'default.png'
             else:
                 head = Config.SERVER_STATICLOADURL + \
-                    '/user/head/' + str(user.head)
-            return 200, '登录成功', dict(token=md5, username=user.username, head=head)
+                    '/com/userhead/' + str(user.head)
+            return 200, '登录成功', dict(token=md5, username=user.username, head=head, id=user.id)
 
         except Exception as e:
             print(e)

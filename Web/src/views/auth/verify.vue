@@ -106,6 +106,10 @@ export default {
     }
   },
   created() {
+    let user = this.$authUser.getUser()
+    if(user){
+      this.$router.push({ name: "home"});
+    }
     this.vcode = this.$route.query.vcode;
     this.SendVcode();
   }

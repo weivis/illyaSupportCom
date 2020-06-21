@@ -76,7 +76,7 @@ class Auth:
 
         if not self.account:
             self.ret_cnmsg = 'Token已失效或不正确, 请重新登录'
-            self.ret_code = SystemCode.TokenInvalid
+            self.ret_code = 10086
             return False
 
         return True

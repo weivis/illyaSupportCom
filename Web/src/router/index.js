@@ -10,12 +10,11 @@ const routes = [
   { path: '/404', component: () => import('@/views/404'), hidden: true },
   {
     path: '/',
-    name: 'Home',
     component: Layout,
     children: [
       {
         path: '/',
-        name: 'Home',
+        name: 'home',
         component: () => import('@/views/Home.vue'),
         meta: {title:'首页'}
       }
@@ -26,7 +25,7 @@ const routes = [
     component: Layout,
     children: [
       {
-        path: '/sgin-in',
+        path: 'sgin-in',
         name: 'login',
         component: () => import('@/views/auth/login.vue'),
         meta: {title:'登录'}
@@ -57,7 +56,7 @@ const routes = [
       },
       {
         path: 'info',
-        name: 'listbangumi',
+        name: 'infobangumi',
         component: () => import('@/views/bangumi/info.vue'),
         meta: {title:'番剧详细信息'}
       },

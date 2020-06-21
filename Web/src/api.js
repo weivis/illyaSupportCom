@@ -72,13 +72,13 @@ export function ArticleInfo(data) {
 // Auth--------------------------------------------------------------------------------------------------------
 
 // 登录
-export function authLogin(email, passport) {
+export function authLogin(email, password) {
     return request({
         url: '/auth/sign-in',
         method: 'post',
         data: {
             email: email,
-            passport: passport
+            password: password
         }
     })
 }

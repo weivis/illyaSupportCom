@@ -1,10 +1,11 @@
 <template>
   <div class="Loginbar">
-
+    
     <div class="userbar" v-if="user">
       <el-dropdown>
         <span class="el-dropdown-link">
-          欢迎你: {{user.userName}}
+          <div class="head"><el-image style="width:100%;height:100%;" :src="user.userHead" fit="cover"></el-image></div>
+          <div class="username">{{user.userName}}</div>
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
@@ -38,11 +39,11 @@ export default {
       this.$http
         .authLogout(this.user.userToken)
         .then(response => {
+          console.log(response)
           if (response.code === 200) {
-            console.log('>用户退出登录')
-            this.Logout_user();
-            this.LogoutUserInfo();
-            this.$router.go(0)
+            // console.log('>用户退出登录')
+            this.$authUser.removeUser()
+            window.location.reload();
           }
         })
         .catch(error => {
@@ -58,4 +59,9 @@ export default {
     height: 60px;line-height: 60px;;
     .link{font-size: 12px;color: #484848}
 }
+.userbar{
+  line-height: 60px;
+  .head{float: left;width: 40px;height: 40px;border-radius: 50px;overflow: hidden;margin-top: 10px;}
+  .username{float: left;margin-left: 15px;}
+  }
 </style>
