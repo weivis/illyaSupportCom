@@ -1,11 +1,18 @@
 <template>
   <div>
-      <div class="Common page-width">
+    <!-- <div class="Common page-width">
       <iframe :src="'https://xbeibeix.com/api/bilibili/biliplayer/?url=' + videoloadurl" allowfullscreen="true" class="iframe" width="100%" scrolling="yes" frameborder="0"></iframe>
-      </div>
+    </div>-->
     <!-- <video :src="'https://xbeibeix.com/api/bilibili/biliplayer/?url=' + 'BV1XC4y1h7yb'" controls="controls">
     您的浏览器不支持 video 标签。
-    </video> -->
+    </video>-->
+    <div class="Common page-width">
+      <div class="videoinfo">
+        <div class="top">{{title}}</div>
+        <div class="bra"></div>
+        <div class="content"></div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -25,13 +32,13 @@ export default {
       original_type: 1,
       original_url: "",
       original_author: "",
-      videoloadurl: "",
+      videoloadurl: ""
     };
   },
   methods: {
     query(id) {
       this.$http
-        .VideoQuery({id:id})
+        .VideoQuery({ id: id })
         .then(response => {
           if (response.code == 200) {
             this.id = response.data.id;
@@ -60,16 +67,31 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.iframe{
-    height: calc(100vw - 100vh);
-    min-height: 640px;
-    max-height: 720px;
+.videoinfo {
+  margin-top: 30px;
+  height: 160px;
+  margin-bottom: 10px;
+  .top {
+    height: 40px;line-height: 40px;
+    width: 100%;
+    font-size: 18px;
+    border-bottom: 1px solid #cecece;
+  }
+  .content {
+    width: 100%;
+    height: 150px;
+  }
+}
+.iframe {
+  height: calc(100vw - 100vh);
+  min-height: 640px;
+  max-height: 720px;
 }
 @media screen and (max-width: 800px) {
-.iframe{
+  .iframe {
     height: calc(100vw - 140vh);
     min-height: 440px;
     max-height: 720px;
-}
+  }
 }
 </style>

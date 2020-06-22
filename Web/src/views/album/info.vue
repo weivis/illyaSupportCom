@@ -150,6 +150,7 @@ export default {
 
 <style lang="scss" scoped>
 .top {
+  margin-top:25px;
   display: flow-root;
   width: 100%;
   .left {
