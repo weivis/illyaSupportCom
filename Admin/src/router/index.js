@@ -21,6 +21,24 @@ const routes = [
     ]
   },
   {
+    path: '/contribute',
+    component: Layout,
+    children: [
+      {
+        path: 'verify',
+        name: 'verifycontribute',
+        component: () => import('@/views/video/verify.vue'),
+        meta: {title:'视频审核'}
+      },
+      {
+        path: 'verify/info',
+        name: 'verifycontributeinfo',
+        component: () => import('@/views/video/info.vue'),
+        meta: {title:'视频审核'}
+      }
+    ]
+  },
+  {
     path: '/bangumi',
     component: Layout,
     children: [

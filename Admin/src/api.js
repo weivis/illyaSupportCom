@@ -293,3 +293,30 @@ export function cvEdit(data) {
 // User--------------------------------------------------------------------------------------------------------
 
 // Video-------------------------------------------------------------------------------------------------------
+
+//资源列表
+export function VideoList(data) {
+    return request({
+        url: '/video/list',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+//获取视频信息
+export function VideoQuery(data) {
+    return request({
+        url: '/video/query',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+//管理员操作视频
+export function VideoAdminVerify(data) {
+    return request({
+        url: '/video/admin/change',
+        method: 'post',
+        data: data || {}
+    })
+}

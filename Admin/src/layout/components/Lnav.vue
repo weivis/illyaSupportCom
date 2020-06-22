@@ -57,8 +57,7 @@
           <i class="el-icon-location"></i>
           <span>视频管理</span>
         </template>
-          <el-menu-item index="6-1">视频管理</el-menu-item>
-          <el-menu-item index="6-2">被退回的稿件</el-menu-item>
+          <router-link to="/contribute/verify"><el-menu-item index="6-1">视频管理</el-menu-item></router-link>
       </el-submenu>
 
     </el-menu>

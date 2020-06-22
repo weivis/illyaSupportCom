@@ -6,7 +6,7 @@
     <div style="width: calc(100% - 250px);float: right;height: 60px;">
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
         <el-menu-item index="1"><router-link to="/">首页</router-link></el-menu-item>
-        <el-menu-item index="2">审核稿件</el-menu-item>
+        <el-menu-item index="2"><router-link to="/contribute/verify">审核稿件</router-link></el-menu-item>
         <el-menu-item index="3">发布新资源</el-menu-item>
         <el-menu-item index="4">发布新文章</el-menu-item>
         </el-menu>
