@@ -9,8 +9,16 @@
     <div class="Common page-width">
       <div class="videoinfo">
         <div class="top">{{title}}</div>
-        <div class="bra"></div>
-        <div class="content"></div>
+        <div class="bra">
+          <span>上传于 {{create_time}}</span>
+          <span class="r"><i class="el-icon-share"></i>分享</span>
+        </div>
+        <div class="content">
+          <div class="head">
+            <el-image style="width:100%;height:100%;display:block;" :src="author_head" fit="cover"></el-image>
+          </div>
+          <div class="info"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -32,7 +40,9 @@ export default {
       original_type: 1,
       original_url: "",
       original_author: "",
-      videoloadurl: ""
+      videoloadurl: "",
+      create_time: "",
+      author_head: ""
     };
   },
   methods: {
@@ -53,6 +63,8 @@ export default {
             this.original_url = response.data.original_url;
             this.original_author = response.data.original_author;
             this.videoloadurl = response.data.videoloadurl;
+            this.create_time = response.data.create_time
+            this.author_head = response.data.author_head
           }
         })
         .catch(error => {
@@ -75,11 +87,25 @@ export default {
     height: 40px;line-height: 40px;
     width: 100%;
     font-size: 18px;
-    border-bottom: 1px solid #cecece;
+    font-weight: bold;
+  }
+  .bra{
+    width: 100%;
+    line-height: 25px;font-size: 14px;
+    border-bottom: 2px solid #cecece;
+    .l{float: left;}
+    .r{float: right;}
   }
   .content {
     width: 100%;
     height: 150px;
+    .head{
+      width: 50px;height: 50px;float: left;
+    }
+    .info{
+      float: right;
+      width: calc(100% - 65px);
+    }
   }
 }
 .iframe {

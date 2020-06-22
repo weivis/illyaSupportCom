@@ -83,7 +83,7 @@ def video_query(request):
     i = obj
 
     return 200, "", {
-        'author_head': SERVER_GULAOBURL + '/static/com/userhead/' + AccountUser.query.filter_by(id=i.upload_userid).first().head if AccountUser.query.filter_by(id=i.upload_userid).first().head else SERVER_GULAOBURL + '/static/com/userhead/' + 'default.png',
+        'author_head': SERVER_GULAOBURL + '/static/com/userhead/' + AccountUser.query.filter_by(id=int(i.upload_userid)).first().head if AccountUser.query.filter_by(id=int(i.upload_userid)).first().head else SERVER_GULAOBURL + '/static/com/userhead/' + 'default.png',
         'author_username': AccountUser.query.filter_by(id=i.upload_userid).first().username,
         'id':i.id,
         'upload_userid':i.upload_userid,
