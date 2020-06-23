@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- <div class="Common page-width">
+    <div class="Common page-width">
       <iframe :src="'https://xbeibeix.com/api/bilibili/biliplayer/?url=' + videoloadurl" allowfullscreen="true" class="iframe" width="100%" scrolling="yes" frameborder="0"></iframe>
-    </div>-->
+    </div>
     <!-- <video :src="'https://xbeibeix.com/api/bilibili/biliplayer/?url=' + 'BV1XC4y1h7yb'" controls="controls">
     您的浏览器不支持 video 标签。
     </video>-->
@@ -10,14 +10,40 @@
       <div class="videoinfo">
         <div class="top">{{title}}</div>
         <div class="bra">
-          <span>上传于 {{create_time}}</span>
+          <span>上传于 {{create_time}}</span> - 
+          <span>
+            所属分区:
+            <span v-if="classification === 1">MAD·AMV</span>
+            <span v-if="classification === 2">MMD</span>
+            <span v-if="classification === 3">技术宅</span>
+            <span v-if="classification === 4">其他</span>
+          </span>
           <span class="r"><i class="el-icon-share"></i>分享</span>
         </div>
         <div class="content">
           <div class="head">
             <el-image style="width:100%;height:100%;display:block;" :src="author_head" fit="cover"></el-image>
           </div>
-          <div class="info"></div>
+          <div class="info">
+            <div class="author_username">{{author_username}}</div>
+            <div class="introduce">{{introduce}}</div>
+            <div class="liinfo">
+              <span class="mr">
+                稿件类型
+                <span v-if="original_type === 1">原创</span>
+                <span v-if="original_type === 2">转载</span>
+              </span>
+
+              <span v-if="original_type === 2" class="mr">
+                转载地址:{{videoloadurl}}
+              </span>
+
+              <span v-if="original_type === 2" class="mr">
+                原作者:{{original_author}}
+              </span>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -42,7 +68,8 @@ export default {
       original_author: "",
       videoloadurl: "",
       create_time: "",
-      author_head: ""
+      author_head: "",
+      author_username: ""
     };
   },
   methods: {
@@ -65,6 +92,7 @@ export default {
             this.videoloadurl = response.data.videoloadurl;
             this.create_time = response.data.create_time
             this.author_head = response.data.author_head
+            this.author_username = response.data.author_username
           }
         })
         .catch(error => {
@@ -95,6 +123,7 @@ export default {
     border-bottom: 2px solid #cecece;
     .l{float: left;}
     .r{float: right;}
+    margin-bottom: 15px;
   }
   .content {
     width: 100%;
@@ -105,6 +134,12 @@ export default {
     .info{
       float: right;
       width: calc(100% - 65px);
+      .author_username{height: 50px;line-height: 50px;font-size: 18px;width: 100%;}
+      .introduce{font-size: 12px;width: 100%;}
+      .liinfo{width: 100%;font-size: 12px;margin-top: 20px;color: #b1b1b1;
+      .mr{
+        margin-right: 10px;
+      }}
     }
   }
 }
