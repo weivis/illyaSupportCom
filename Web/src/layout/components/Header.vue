@@ -79,11 +79,11 @@ export default {
           cntitle: "资源",
           link: "/album"
         },
-        {
-          jptitle: "フォーラム",
-          cntitle: "BBS",
-          link: "/bbs"
-        }
+        // {
+        //   jptitle: "フォーラム",
+        //   cntitle: "BBS",
+        //   link: "/bbs"
+        // }
       ]
     };
   },

@@ -11,7 +11,13 @@ class PhotoData(db.Model):
     title = db.Column(db.String(255))               # 标题
     info = db.Column(db.Text)                       # 介绍
     category = db.Column(db.Integer)                # 类目
-    verify = db.Column(db.Integer)                  # 类目
+    '''
+        1 : 原创
+        2 : Pixiv
+        3 : Cospaly
+    '''
+    pixiv_author = db.Column(db.String(255))        # pixiv 作者
+    verify = db.Column(db.Integer)                  # 审核
     '''
         1 : 通过审核
         2 = 未审核
