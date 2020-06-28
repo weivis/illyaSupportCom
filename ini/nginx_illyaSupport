@@ -7,7 +7,7 @@ server {
 
     client_max_body_size    1024m;
 
-    ssl on;
+    ssl off;
 
     #证书文件名称
     ssl_certificate /home/ubuntu/server/illyaSupportCom/SSL/illya_support_weivird_com.crt;
@@ -46,12 +46,6 @@ server {
 
     location / {
       alias   /home/ubuntu/server/illyaSupportCom/Web/dist/;
-      index  index.html;
-      try_files $uri $uri /index.html;
-    }
-
-    location /admin {
-      alias   /home/ubuntu/server/illyaSupportCom/Admin/dist/;
       index  index.html;
       try_files $uri $uri /index.html;
     }
