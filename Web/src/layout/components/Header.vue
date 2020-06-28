@@ -72,7 +72,7 @@ export default {
         {
           jptitle: "アルバム",
           cntitle: "相簿",
-          link: "/bangumi"
+          link: "/photo"
         },
         {
           jptitle: "",

@@ -140,6 +140,18 @@ const routes = [
       }
     ]
   },
+  {
+    path: '/photo',
+    component: Layout,
+    children: [
+      {
+        path: '/',
+        name: 'listphoto',
+        component: () => import('@/views/photo/index.vue'),
+        meta: {title:'相簿'}
+      },
+    ]
+  },
 ]
 
 const router = new VueRouter({

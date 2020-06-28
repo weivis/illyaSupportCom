@@ -1,15 +1,11 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <CommonContentNav :conttype.sync="contentType" background_color="#000000" @conttype="getList(contentType)" button_color="#f4f4f4" button_style="1" :buttlist='buttlist'/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-import CommonContentNav from '@/components/CommonContentNav.vue'
 
 export default {
   name: 'Home',
@@ -26,8 +22,6 @@ export default {
     }
   },
   components: {
-    HelloWorld,
-    CommonContentNav
   },
   methods: {
     getList(n){
