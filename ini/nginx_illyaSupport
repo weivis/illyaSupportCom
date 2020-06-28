@@ -1,13 +1,19 @@
 server {
     listen 80;
     server_name illya-support.weivird.com;
+    rewrite ^(.*) https://illya-support.weivird.com$1 permanent;
+}
+
+server {
+    listen 443;
+    server_name illya-support.weivird.com;
 
     rewrite_log             on;
     charset                 utf8;
 
     client_max_body_size    1024m;
 
-    ssl off;
+    ssl on;
 
     #证书文件名称
     ssl_certificate /home/ubuntu/server/illyaSupportCom/SSL/illya_support_weivird_com.crt;
@@ -46,6 +52,12 @@ server {
 
     location / {
       alias   /home/ubuntu/server/illyaSupportCom/Web/dist/;
+      index  index.html;
+      try_files $uri $uri /index.html;
+    }
+
+    location /admin {
+      alias   /home/ubuntu/server/illyaSupportCom/Admin/dist/;
       index  index.html;
       try_files $uri $uri /index.html;
     }
