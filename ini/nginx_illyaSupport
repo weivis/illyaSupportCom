@@ -44,14 +44,14 @@ server {
         uwsgi_pass      unix:/tmp/illya_support.sock;
     }
 
-    location /admin {
-      alias   /home/ubuntu/server/illyaSupportCom/Admin/dist/;
+    location / {
+      alias   /home/ubuntu/server/illyaSupportCom/Web/dist/;
       index  index.html;
       try_files $uri $uri /index.html;
     }
 
-    location / {
-      alias   /home/ubuntu/server/illyaSupportCom/Web/dist/;
+    location /admin {
+      alias   /home/ubuntu/server/illyaSupportCom/Admin/dist/;
       index  index.html;
       try_files $uri $uri /index.html;
     }
