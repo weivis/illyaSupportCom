@@ -22,7 +22,10 @@ Vue.prototype.$authUser = auth
 Vue.prototype.$ServerHttpUrl = 'http://127.0.0.1:8888/'
 Vue.prototype.$Message = Message
 
-// auth.removeUserToken()
+// // auth.removeUserToken()
+
+// Vue.config.publicPath = './'
+Vue.config.publicPath = '/front'
 
 const whiteList = ['/login','/404'] // 不重定向白名单
 router.beforeEach((to, from, next) => {
