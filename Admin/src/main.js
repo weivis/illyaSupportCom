@@ -25,7 +25,6 @@ Vue.prototype.$Message = Message
 // // auth.removeUserToken()
 
 // Vue.config.publicPath = './'
-Vue.config.publicPath = '/front'
 
 const whiteList = ['/login','/404'] // 不重定向白名单
 router.beforeEach((to, from, next) => {
