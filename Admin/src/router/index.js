@@ -136,8 +136,8 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: 'admin',
+  base: 'front',
+  mode: 'history', // require service support
   routes
 })
 
