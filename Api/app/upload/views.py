@@ -13,7 +13,8 @@ UPLOAD_KEY_FLOAD = {
     'cvhead':'/com/cvhead',
     'articleimg':'/com/article/img',
     'articlecover':'/com/article/cover',
-    'videocover':'/com/video/cover'
+    'videocover':'/com/video/cover',
+    'photo':'/com/photo/image'
     }
 
 def FileCompress_Head(files):

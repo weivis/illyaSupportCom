@@ -129,6 +129,18 @@ const routes = [
     ]
   },
   {
+    path: '/photo',
+    component: Layout,
+    children: [
+      {
+        path: '/',
+        name: 'listphoto',
+        component: () => import('@/views/photo/list.vue'),
+        meta: {title:'相簿'}
+      },
+    ]
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/Login/')

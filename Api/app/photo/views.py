@@ -9,6 +9,7 @@ def list(request):
     category = request.get('category', None)
     sfilter = request.get('sfilter', None)
     userid = request.get('userid', None)
+    types = request.get('type', None)
     pages = request.get('pages', 1)
 
     if pages == 0:
@@ -18,7 +19,11 @@ def list(request):
     if not sfilter:
         querys = PhotoData.query.filter(PhotoData.verify == 1)
     else:
-        querys = PhotoData.query.filter().all()
+        querys = PhotoData.query.filter()
+
+    # 审核状态
+    if types == 1:
+        querys = querys.filter_by(verify=2)
 
     # 类目
     if category:
@@ -26,7 +31,7 @@ def list(request):
 
     # 用户id
     if userid:
-        querys = querys.filter_by(upload_userid=int(userid))
+        querys = querys.filter_by(upload_user=int(userid))
 
     count, items, page, pages = _Paginate(querys, pages)
 

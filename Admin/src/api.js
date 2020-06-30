@@ -320,3 +320,32 @@ export function VideoAdminVerify(data) {
         data: data || {}
     })
 }
+
+// Photo------------------------------------------------------------------------------------------
+
+// 相簿列表
+export function PhotoList(data) {
+    return request({
+        url: '/photo/list',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+// 相簿上传
+export function PhotoUp(data) {
+    return request({
+        url: '/photo/up',
+        method: 'post',
+        data: data || {}
+    })
+}
+
+// 相簿更改
+export function PhotoChange(data) {
+    return request({
+        url: '/photo/change',
+        method: 'post',
+        data: data || {}
+    })
+}

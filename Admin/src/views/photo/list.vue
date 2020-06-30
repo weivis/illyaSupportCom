@@ -1,15 +1,17 @@
 <template>
   <div>
-    <CommonContentNav
-      :conttype.sync="contentType"
-      @conttype="getList()"
-      button_style="0"
-      :buttlist="buttlist"
-      background_color="#5d3a41"
-    />
-    <div class="Common page-width content">
+      <div>
+        类型
+        <el-radio-group v-model="category">
+          <el-radio-button :label="0">全部</el-radio-button>
+          <el-radio-button :label="1">原创</el-radio-button>
+          <el-radio-button :label="2">Pixiv</el-radio-button>
+          <el-radio-button :label="3">Cospaly</el-radio-button>
+        </el-radio-group>
+      </div>
+    <div class="Common page-width pcont">
       <div v-for="(item, index) in list" :key="index" class="item">
-          {{item}}
+          {{item.title}}
       </div>
     </div>
     <Pagination
@@ -22,19 +24,12 @@
 </template>
 
 <script>
-import CommonContentNav from "@/components/CommonContentNav.vue";
 import Pagination from "@/components/Pagination.vue";
 export default {
-  name: "index",
+  name: "contribute",
   data() {
     return {
-      buttlist: [
-        { title: "全部", conttype: 0 },
-        { title: "原创", conttype: 1 },
-        { title: "Pixiv", conttype: 2 },
-        { title: "Cospaly", conttype: 3 },
-      ],
-      contentType: 0, // 当前选中内容分类
+      category: 0,
       currentPage: 1, // 当前页码
       totalItem: 0, // 总条目
       totalPage: 0, // 总页数
@@ -43,15 +38,20 @@ export default {
     };
   },
   components: {
-    CommonContentNav,
     Pagination
+  },
+  watch:{
+      category(){
+          this.getList()
+      }
   },
   methods: {
     getList() {
       this.$http
         .PhotoList({
-          category : this.contentType,
+          category: this.category,
           pages: this.currentPage,
+          sfilter: 1
         })
         .then(response => {
           if (response.code == 200) {
