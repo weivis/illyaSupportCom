@@ -25,6 +25,10 @@ def list(request):
     if types == 1:
         querys = querys.filter_by(verify=2)
 
+    # 审核状态
+    if types == 2:
+        querys = querys.filter_by(verify=1)
+
     # 类目
     if category:
         querys = querys.filter(PhotoData.category == category)

@@ -14,6 +14,7 @@ def photo_list(request):
         sfilter     int|str 内容类型
         userid      int     用户id
         pages       int     分页
+        type        int     不为空时获取未审核的    默认值0 传1
 
     Result
         id

@@ -1,13 +1,21 @@
 <template>
   <div>
       <div>
-        类型
+        分区
         <el-radio-group v-model="category">
           <el-radio-button :label="0">全部</el-radio-button>
           <el-radio-button :label="1">原创</el-radio-button>
           <el-radio-button :label="2">Pixiv</el-radio-button>
           <el-radio-button :label="3">Cospaly</el-radio-button>
         </el-radio-group>
+
+        类型
+        <el-radio-group v-model="type">
+          <el-radio-button :label="0">全部</el-radio-button>
+          <el-radio-button :label="1">未审核</el-radio-button>
+          <el-radio-button :label="2">已通过审核</el-radio-button>
+        </el-radio-group>
+
       </div>
     <div class="Common page-width pcont">
       <div v-for="(item, index) in list" :key="index" class="item">
@@ -30,6 +38,7 @@ export default {
   data() {
     return {
       category: 0,
+      type: 0,
       currentPage: 1, // 当前页码
       totalItem: 0, // 总条目
       totalPage: 0, // 总页数
@@ -43,6 +52,9 @@ export default {
   watch:{
       category(){
           this.getList()
+      },
+      type(){
+          this.getList()
       }
   },
   methods: {
@@ -51,6 +63,7 @@ export default {
         .PhotoList({
           category: this.category,
           pages: this.currentPage,
+          type: this.type,
           sfilter: 1
         })
         .then(response => {
