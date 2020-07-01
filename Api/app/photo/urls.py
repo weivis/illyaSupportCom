@@ -75,11 +75,9 @@ def admin_change(request):
     Args
         id      int       要操作的图片id
         set     int       操作类型
-            1 : 通过审核
-            2 : 等待审核中
-            3 : 未审核
-            4 : 删除
-
+            1 : 审核通过
+            2 : 退回
+            3 : 删除
     Result
         code
             200 成功

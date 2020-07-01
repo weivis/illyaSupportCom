@@ -20,7 +20,8 @@ class PhotoData(db.Model):
     verify = db.Column(db.Integer)                  # 审核
     '''
         1 : 通过审核
-        2 = 未审核
+        2 : 未审核
+        3 : 退回
     '''
     update_time = db.Column(db.DateTime, index=True, default=datetime.now, onupdate=datetime.now)  # 更新时间
     create_time = db.Column(db.DateTime, index=True, default=datetime.now)  # 创建时间

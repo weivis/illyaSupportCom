@@ -60,6 +60,14 @@
           <router-link to="/contribute/verify"><el-menu-item index="6-1">视频管理</el-menu-item></router-link>
       </el-submenu>
 
+      <el-submenu index="7">
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span>相簿管理</span>
+        </template>
+          <router-link to="/photo"><el-menu-item index="7-1">相簿管理</el-menu-item></router-link>
+      </el-submenu>
+
     </el-menu>
   </el-col>
     </div>

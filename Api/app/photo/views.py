@@ -135,25 +135,21 @@ def admin_change(request):
 
     if sets:
         sets = int(sets)
+        if sets == 1:
+            obj.verify = 1
 
-        if sets in [1,2,3]:
-            obj.sets = sets
-            try:
-                db.session.commit()
-                return 200, '', {}
+        if sets == 2:
+            obj.verify = 3
 
-            except Exception as e:
-                print(e)
-                return 502, '服务器出错', {}
+        if sets == 3:
+            db.session.delete(obj)
 
-        if sets == 4:
-            try:
-                db.session.delete(obj)
-                db.session.commit()
-                return 200, '删除成功', {}
+        try:
+            db.session.commit()
+            return 200, '成功', {}
 
-            except Exception as e:
-                print(e)
-                return 502, '服务器出错', {}
+        except Exception as e:
+            print(e)
+            return 502, '服务器出错', {}
 
     return 400, '操作类型不能为空或参数有误', {}
