@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog title="提示" :visible.sync="dialogVisible" width="30%">
+    <el-dialog title="提示" :visible.sync="dialogVisible" width="500px">
       <el-upload class :show-file-list="false" drag action :http-request="uploadfile" multiple>
         <img v-if="loadcover" :src="loadcover" style="width: 100%" />
         <i class="el-icon-upload"></i>
@@ -41,11 +41,16 @@
       <el-row class="item-content">
         <div v-for="(item, index) in list" :key="index" class="item">
           
+          <div class="rb" @click="del(item.id)">删除</div>
           <div class="l">
-            <img :src="item.file" style="width: 100%" />
+            <img :src="item.cover" style="width: 100%" />
           </div>
           <div class="r">
-            {{item.title}}
+            <div class="lc">
+              <div class="title">{{item.title}}</div>
+              <div class="date">上传时间: {{item.create_time}}</div>
+              <div class="info">介绍: {{item.info}}</div>
+            </div>
           </div>
           
         </div>
@@ -86,6 +91,21 @@ export default {
     Pagination
   },
   methods: {
+    del(val){
+      this.$http
+        .PhotoChange({
+          id:val,
+          set:1
+        })
+        .then(response => {
+          if (response.code == 200) {
+            this.getList();
+          }
+        })
+        .catch(error => {
+          console.log("error", error);
+        });
+    },
     uploadfile(file) {
       const formData = new FormData();
       formData.append("file", file.file);
@@ -107,13 +127,18 @@ export default {
         .PhotoUp({
           file: this.upload_file,
           title: this.upload_title,
-          info: this.info,
+          info: this.upload_info,
           category: this.upload_category
         })
         .then(response => {
           if (response.code == 200) {
             console.log(response.msg);
             this.dialogVisible = false;
+            this.upload_file = ''
+            this.upload_title = ''
+            this.upload_info = ''
+            this.upload_category = 0
+            this.getList();
           }
         })
         .catch(error => {
@@ -156,12 +181,23 @@ export default {
 }
 .item-content{ margin-top: 15px;}
 .item {
+  position: relative;
   height: 200px;
   border: 1px solid #f4f4f4;
-  padding: 20px;
+  padding: 15px;
   margin-bottom: 15px;
   display: flow-root;
+  .rb{width: 80px;background-color: #f4f4f4;height: 100%;position: absolute;right: 0;top: 0;bottom: 0;text-align: center;text-align-last: center;font-size: 14px;line-height: 230px;}
+  .rb:hover{background-color: #acacac;color: #fff;}
   .l{width: 200px;float: left;height: 200px;overflow: hidden;}
-  .r{width: calc(100% - 220px);float: right;}
+  .r{
+    .lc{
+      width: calc(100% - 80px);
+      .title{width: 100%;font-size: 18px;}
+    .info{width: 100%;font-size: 12px;margin-top: 30px;height: 80px;}
+    .date{width: 100%;font-size: 12px;margin-top: 5px;}
+    }
+    width: calc(100% - 215px);float: right;
+    }
 }
 </style>

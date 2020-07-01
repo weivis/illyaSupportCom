@@ -51,7 +51,7 @@ def photo_up(request):
     return ReturnRequest(c,m,d)
 
 @photo.route('/change', methods=["POST"])
-@requestPOST
+@TokenPost([2])
 def change(request):
     '''用户操作
     Args
