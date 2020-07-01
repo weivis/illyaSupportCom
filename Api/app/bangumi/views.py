@@ -223,7 +223,10 @@ def bangumi_playurl_addoredit(request):
     url = request.get('url',None)
     source_name = request.get('source_name',None)
     bangumi_id = request.get('bangumi_id',None)
-    sort = request.get('sort',0)
+    sort = request.get('sort',None)
+
+    if not sort:
+        sort = 0
 
     if not url:
         return 400, '链接地址不能为空', {}
