@@ -22,6 +22,11 @@
       :data="list"
       style="width: 100%">
       <el-table-column
+        prop="id"
+        label="ID"
+        width="50">
+      </el-table-column>
+      <el-table-column
         prop=""
         label="图片"
         width="150">
@@ -50,6 +55,14 @@
         prop="create_time"
         label="上传时间"
         width="180">
+      </el-table-column>
+      <el-table-column label="更多" width="500px">
+        <template slot-scope="scope">
+          <el-button @click="change(scope.row.id, 1)">通过</el-button>
+          <el-button @click="change(scope.row.id, 2)">设为等待</el-button>
+          <el-button @click="change(scope.row.id, 3)">退回</el-button>
+          <el-button @click="change(scope.row.id, 4)">删除</el-button>
+        </template>
       </el-table-column>
     </el-table>
       <!-- <div v-for="(item, index) in list" :key="index" class="item">
@@ -92,6 +105,21 @@ export default {
       }
   },
   methods: {
+    change(id,type){
+      this.$http
+        .PhotoAdminChange({
+          id: id,
+          set: type
+        })
+        .then(response => {
+          if (response.code == 200) {
+            this.getList();
+          }
+        })
+        .catch(error => {
+          console.log("error", error);
+        });
+    },
     getList() {
       this.$http
         .PhotoList({

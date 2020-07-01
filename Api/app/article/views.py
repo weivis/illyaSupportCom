@@ -67,7 +67,8 @@ def article_info(request):
         'status':i.status,
         'show_index':i.show_index,
         'is_delete':i.is_delete,
-        'content':i.content
+        'content':i.content,
+        'create_time':i.create_time.strftime("%Y-%m-%d %H:%M:%S")
     }
 
     return 200, 'ok', result

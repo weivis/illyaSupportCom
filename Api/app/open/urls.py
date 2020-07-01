@@ -2,12 +2,10 @@ from app.open import open, views
 from app.Common import ReturnRequest
 from app.Middleware import requestPOST, TokenPost
 
-@open.route('/list', methods=["POST"])
+@open.route('/index', methods=["POST"])
 @requestPOST
-def cv_list(request):
+def index(request):
     '''
-    Args
-    Result
     '''
-    c,m,d = views.cv_list(request.json)
+    c,m,d = views.index(request.json)
     return ReturnRequest(c,m,d)

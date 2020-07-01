@@ -125,6 +125,7 @@ def change(request):
     return 400, '操作类型不能为空', {}
 
 def admin_change(request):
+    print(request)
     id = request.get('id', None)
     sets = request.get('set', None)
 

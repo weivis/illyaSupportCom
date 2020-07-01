@@ -2,8 +2,8 @@ import axios from 'axios'
 import { Message } from 'element-ui'
 import {removeUser, getUserToken} from './auth'
 import router from '../router'
-// let HttpRoot = 'http://illya-support.weivird.com/api'
-let HttpRoot = 'http://127.0.0.1:8888/api'
+let HttpRoot = 'https://illya-support.weivird.com/api'
+// let HttpRoot = 'https://127.0.0.1:8888/api'
 
 // 创建axios实例
 const service = axios.create({

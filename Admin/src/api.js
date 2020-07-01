@@ -349,3 +349,12 @@ export function PhotoChange(data) {
         data: data || {}
     })
 }
+
+// 管理员更改
+export function PhotoAdminChange(data) {
+    return request({
+        url: '/photo/admin/change',
+        method: 'post',
+        data: data || {}
+    })
+}

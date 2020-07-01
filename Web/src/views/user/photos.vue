@@ -47,7 +47,11 @@
           </div>
           <div class="r">
             <div class="lc">
-              <div class="title">{{item.title}}</div>
+              <div class="title">{{item.title}} - (
+                <span v-if="item.verify == 1">以通过审核</span>
+                <span v-if="item.verify == 2">等待审核中</span>
+                <span v-if="item.verify == 3">已被退回</span>
+                )</div>
               <div class="date">上传时间: {{item.create_time}}</div>
               <div class="info">介绍: {{item.info}}</div>
             </div>
@@ -138,6 +142,7 @@ export default {
             this.upload_title = ''
             this.upload_info = ''
             this.upload_category = 0
+            this.loadcover = ''
             this.getList();
           }
         })

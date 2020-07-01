@@ -269,3 +269,14 @@ export function PhotoChange(data) {
         data: data || {}
     })
 }
+
+// index------------------------------------------------------------------------------------------
+
+// 首页数据
+export function getindex(data) {
+    return request({
+        url: '/open/index',
+        method: 'post',
+        data: data || {}
+    })
+}
