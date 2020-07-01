@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="bill" :style="bill">
-      <a class="a" href="/1" target="_blank"></a>
+      <a class="a" href="/bangumi/info?id=4" target="_blank"></a>
     </div>
 
     <div class="Common page-width content">
@@ -265,6 +265,8 @@ export default {
   .cover{
     float: left;
     width: 145px;
+    height: 193px;
+    overflow: hidden;
   }
   .r{
     position: relative;
