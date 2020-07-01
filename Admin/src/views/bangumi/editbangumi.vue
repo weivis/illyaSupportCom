@@ -28,7 +28,7 @@
       <template>
         <el-table
           :data="bdcv_list"
-          style="width: 100%">
+          style="width: 100%; height: 700px;overflow-y: scroll;">
           <el-table-column
             prop="id"
             label="CVID"
