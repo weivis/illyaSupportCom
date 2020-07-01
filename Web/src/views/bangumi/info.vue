@@ -236,6 +236,7 @@ export default {
   float: left;
   display: flex;
   margin-right: 50px;
+  margin-bottom: 20px;
   .head {
     height: 44.5px;
     width: 44.5px;

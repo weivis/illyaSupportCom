@@ -1,7 +1,9 @@
 # IllyaSupportCom 伊莉雅应援网站
 
-    illya-support.weivird.com
-    网站当前处于开发状态中 如有兴趣欢迎加入一起开发
+    网站地址
+    https://illya-support.weivird.com/
+
+    网站已经将近开发完成 线上地址可以访问
     魔法少女☆伊莉雅同人爱好者网站
     中国地区応援サイト
 
@@ -12,6 +14,7 @@
     https://illya-support.weivird.com/docs/api/
 
 ### 已完成功能接口和进度
+https://illya-support.weivird.com/docs/api/ 在线文档
 ![Image text](/image/5.png)
 
 ### 开源说明
@@ -67,17 +70,3 @@
 > 部署
 
     MaridDB Uwsgi Supervisord Nginx
-
-### 设计稿
-大概开发好后的样子
-> 番剧详情页
-![Image text](/image/1.png)
-
-> 资源下载页
-![Image text](/image/2.png)
-
-> 官方动态和伊莉雅相关资讯页面
-![Image text](/image/4.png)
-
-### 功能设计蓝图
-![Image text](/image/3.png)
