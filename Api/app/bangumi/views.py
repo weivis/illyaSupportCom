@@ -286,11 +286,11 @@ def Bangumi_cv_addoredit(request):
     id = request.get('id',None)
     bangumi_id = request.get('bangumi_id',None)
     cv_id = request.get('cv_id',None)
-    sort = request.get('sort',0)
+    sort = request.get('sort',None)
 
     if not sort:
         sort = 0
-        
+
     role_name = request.get('role_name',None)
 
     if id:
