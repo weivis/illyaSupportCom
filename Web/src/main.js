@@ -19,7 +19,7 @@ Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false
 Vue.prototype.$http = api
 Vue.prototype.$authUser = auth
-Vue.prototype.$ServerHttpUrl = 'http://127.0.0.1:8888/'
+Vue.prototype.$ServerHttpUrl = 'https://illya-support.weivird.com'
 Vue.prototype.$Message = Message
 
 new Vue({
