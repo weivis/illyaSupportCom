@@ -119,7 +119,7 @@ def auth_register(request):
         if gtype:
 
             try:
-                html = '<h3>点击以下链接完成账户注册验证</h3><a href="http://localhost:8080/auth/verify?vcode={0}">点击完成注册验证</a> 或 复制地址到浏览器打开http://localhost:8080/auth/verify?vcode={1}'.format(
+                html = '<h3>点击以下链接完成账户注册验证</h3><a href="https://illya-support.weivird.com/auth/verify?vcode={0}">点击完成注册验证</a> 或 复制地址到浏览器打开http://localhost:8080/auth/verify?vcode={1}'.format(
                     str(vcode), str(vcode))
                 SeedEmail(
                     email_title='[ 魔法少女伊莉雅应援站(illya-support.weivird.com) ]注册账户邮箱验证',
@@ -158,7 +158,7 @@ def auth_register_again_sendemail(request):
     if gtype:
 
         try:
-            html = '<h3>点击以下链接完成账户注册验证</h3><a href="http://localhost:8080/auth/verify?vcode={0}">点击完成注册验证</a> 或 复制地址到浏览器打开http://localhost:8080/auth/verify?vcode={1}'.format(
+            html = '<h3>点击以下链接完成账户注册验证</h3><a href="https://illya-support.weivird.com/auth/verify?vcode={0}">点击完成注册验证</a> 或 复制地址到浏览器打开http://localhost:8080/auth/verify?vcode={1}'.format(
                     str(vcode), str(vcode))
             SeedEmail(
                 email_title='[ 魔法少女伊莉雅应援站(illya-support.weivird.com) ]注册账户邮箱验证',

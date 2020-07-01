@@ -5,7 +5,7 @@
         <div class="logo">
           <router-link to="/">
             <div class="img">
-              <img src="http://127.0.0.1:8888/static/logo.png" style="height:100%" />
+              <img src="https://illya-support.weivird.com/static/logo.png" style="height:100%" />
             </div>
             <div class="lines"></div>
             <div class="title">

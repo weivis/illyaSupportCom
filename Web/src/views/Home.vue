@@ -153,7 +153,7 @@ export default {
   data() {
     return {
       bill:
-        "background-image: url(http://127.0.0.1:8888/static/com/bill/1.jpg);",
+        "background-image: url(https://illya-support.weivird.com/static/com/bill/1.jpg);",
       moduledata_madamv: [],
       moduledata_bangumi: [],
       moduledata_news: [],
