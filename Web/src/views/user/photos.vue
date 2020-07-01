@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog title="提示" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+    <el-dialog title="提示" :visible.sync="dialogVisible" width="30%">
       <el-upload class :show-file-list="false" drag action :http-request="uploadfile" multiple>
         <img v-if="loadcover" :src="loadcover" style="width: 100%" />
         <i class="el-icon-upload"></i>
@@ -37,7 +37,20 @@
       <el-row>
         <el-button @click="dialogVisible = true">上传图片</el-button>
       </el-row>
-      <div>{{list}}</div>
+
+      <el-row class="item-content">
+        <div v-for="(item, index) in list" :key="index" class="item">
+          
+          <div class="l">
+            <img :src="item.file" style="width: 100%" />
+          </div>
+          <div class="r">
+            {{item.title}}
+          </div>
+          
+        </div>
+      </el-row>
+
     </div>
     <Pagination
       :total="totalItem"
@@ -140,5 +153,15 @@ export default {
 <style lang="scss" scoped>
 .content {
   margin-top: 25px;
+}
+.item-content{ margin-top: 15px;}
+.item {
+  height: 200px;
+  border: 1px solid #f4f4f4;
+  padding: 20px;
+  margin-bottom: 15px;
+  display: flow-root;
+  .l{width: 200px;float: left;height: 200px;overflow: hidden;}
+  .r{width: calc(100% - 220px);float: right;}
 }
 </style>

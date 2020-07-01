@@ -42,7 +42,8 @@ def list(request):
     result = [{
         'id':i.id,
         'upload_userid':i.upload_user,
-        'file':i.file,
+        'file': SERVER_GULAOBURL + '/static/com/photo/image/' + i.file,
+        'cover': SERVER_GULAOBURL + '/static/com/photo/cover/' + i.file,
         'title':i.title,
         'info':i.info,
         'category':i.category,

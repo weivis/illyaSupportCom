@@ -97,8 +97,6 @@ def upload_file(request):
     except:
         return 400, '错误: 没有文件', ''
 
-    # FileCompress_Head(file)
-
     upload_key = request.form.get('uploadKey',None)
 
     if not upload_key:
@@ -121,6 +119,10 @@ def upload_file(request):
 
     else:
         files = file
+
+    if upload_key == 'photo':
+        newfiles = FileCompress_Head(file)
+        newfiles.save(os.path.join(os.path.abspath('app/static/com/photo/cover/'), newfilename))
 
     files.save(os.path.join(os.path.abspath('app/static/' + UPLOAD_KEY_FLOAD[str(upload_key)] + "/"), newfilename))
 
