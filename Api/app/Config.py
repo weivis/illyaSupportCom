@@ -22,7 +22,7 @@ RUNPORT = 8888          # 运行端口号
 
 # SERVER_GULAOBURL = HOSTQUERYTYPE + '://' + RUNHOST + ':' + str(RUNPORT)
 
-SERVER_GULAOBURL = 'https://illya-support.weivird.com/'
+SERVER_GULAOBURL = 'https://illya-support.weivird.com'
 
 # 静态文件加载地址
 SERVER_STATICLOADURL = SERVER_GULAOBURL + '/static'
