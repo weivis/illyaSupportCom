@@ -36,7 +36,7 @@ export default {
       input_repassword: "",
       input_username: "",
       background:
-        "background-image: url(http://127.0.0.1:8888/static/com/image/register-background.jpg);"
+        "background-image: url(https://illya-support.weivird.com/static/com/image/register-background.jpg);"
     };
   },
   methods: {

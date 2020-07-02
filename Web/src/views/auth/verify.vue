@@ -61,7 +61,7 @@ export default {
     return {
       vcode: "",
       pst: 0,
-      background:"background-image: url(http://127.0.0.1:8888/static/com/image/verify-background.jpg);",
+      background:"background-image: url(https://illya-support.weivird.com/static/com/image/verify-background.jpg);",
       resendemail_win:false,
       resendemail_input: ''
     };
