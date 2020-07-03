@@ -19,7 +19,7 @@
         <div class="info">
           <div class="content">
             <div class="buttonli">
-              <el-link :href="'/contribute/verify/info?id=' + item.id" target="_blank" style="margin-right: 15px"><el-button>审核</el-button></el-link>
+              <el-link :href="'/front/contribute/verify/info?id=' + item.id" target="_blank" style="margin-right: 15px"><el-button>审核</el-button></el-link>
             </div>
             <div class="title">
               <span class="span"><el-link :href="'/doujin/info?id=' + item.id" target="_blank" class="span" :underline="false" style="font-size: 18px;">{{item.title}}</el-link></span>
