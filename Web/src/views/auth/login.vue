@@ -30,7 +30,7 @@ export default {
       input_email: "",
       input_password: "",
       background:
-        "background-image: url(http://127.0.0.1:8888/static/com/image/login-background.jpg);"
+        "background-image: url(https://illya-support.weivird.com/static/com/image/login-background.jpg);"
     };
   },
   methods: {
